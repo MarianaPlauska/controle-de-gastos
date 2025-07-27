@@ -40,43 +40,51 @@ const ExpenseList = () => {
   return (
     <div className="expense-list-container">
       <h3>Gastos Recentes</h3>
-      <div className="expense-list">
-        {expenses.map(expense => (
-          <div key={expense.id} className="expense-item">
-            <div className="expense-header">
-              <div className="expense-date">
+      
+      <table className="expense-table">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Valor</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {expenses.map(expense => (
+            <tr key={expense.id}>
+              <td className="expense-date">
                 {formatDate(expense.date)}
-              </div>
-              <div className="expense-amount">
-                {formatCurrency(expense.amount)}
-              </div>
-            </div>
-            
-            <div className="expense-details">
-              <div className="expense-description">
-                <span 
-                  className="category-dot"
-                  style={{ backgroundColor: categoryColors[expense.category] }}
-                />
-                {expense.description}
-              </div>
-              <div className="expense-category">
+              </td>
+              <td>
+                <div className="expense-description">
+                  <span 
+                    className="category-dot"
+                    style={{ backgroundColor: categoryColors[expense.category] }}
+                  />
+                  {expense.description}
+                </div>
+              </td>
+              <td className="expense-category">
                 {categoryNames[expense.category]}
-              </div>
-            </div>
-            
-            <div className="expense-actions">
-              <button
-                className="delete-button"
-                onClick={() => deleteExpense(expense.id)}
-                aria-label="Excluir gasto"
-              >
-                <Trash2 size={16} />
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+              </td>
+              <td className="expense-amount">
+                {formatCurrency(expense.amount)}
+              </td>
+              <td>
+                <button
+                  className="delete-button"
+                  onClick={() => deleteExpense(expense.id)}
+                  aria-label="Excluir gasto"
+                >
+                  <Trash2 size={14} />
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
