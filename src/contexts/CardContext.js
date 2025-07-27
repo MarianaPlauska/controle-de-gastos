@@ -48,7 +48,12 @@ export const CardProvider = ({ children }) => {
   };
 
   const updateCardData = (newData) => {
-    setCardData(prev => ({ ...prev, ...newData }));
+    console.log('Updating card data:', newData); // Debug
+    setCardData(prev => {
+      const updated = { ...prev, ...newData };
+      console.log('Updated card data:', updated); // Debug
+      return updated;
+    });
   };
 
   const getTotalSpent = () => {

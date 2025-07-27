@@ -15,14 +15,17 @@ const CardSettings = ({ onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Saving card data:', formData); // Debug
     updateCardData(formData);
     onClose();
   };
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    console.log('Field changed:', name, value); // Debug
     setFormData(prev => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [name]: value
     }));
   };
 
