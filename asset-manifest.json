@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/controle-de-gastos/static/css/main.06de1d3d.css",
+    "main.js": "/controle-de-gastos/static/js/main.9328b79a.js",
+    "index.html": "/controle-de-gastos/index.html",
+    "main.06de1d3d.css.map": "/controle-de-gastos/static/css/main.06de1d3d.css.map",
+    "main.9328b79a.js.map": "/controle-de-gastos/static/js/main.9328b79a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.06de1d3d.css",
+    "static/js/main.9328b79a.js"
+  ]
+}
