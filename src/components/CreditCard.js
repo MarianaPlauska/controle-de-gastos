@@ -14,10 +14,10 @@ const CreditCard = ({ onSettingsClick }) => {
     return '#22c55e';
   };
 
-  const formatRechargeDate = (dateString) => {
-    if (!dateString) return 'N/A';
-    const date = new Date(dateString);
-    return date.toLocaleDateString('pt-BR');
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const [year, month, day] = dateString.split('-');
+    return `${day}/${month}/${year}`;
   };
 
   return (
@@ -92,7 +92,7 @@ const CreditCard = ({ onSettingsClick }) => {
         <div className="recharge-info">
           <span className="label">Próxima recarga</span>
           <span className="value">
-            {formatRechargeDate(cardData?.nextRecharge)}
+            {formatDate(cardData?.nextRecharge)}
           </span>
         </div>
       </div>
