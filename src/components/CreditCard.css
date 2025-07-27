@@ -257,36 +257,6 @@
   color: var(--text-primary);
 }
 
-/* Chip do cartão */
-.card-chip {
-  position: absolute;
-  bottom: var(--spacing-md);
-  left: var(--spacing-md);
-  width: 35px;
-  height: 25px;
-  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-  border-radius: 5px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-.card-chip::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 18px;
-  height: 14px;
-  background: repeating-linear-gradient(
-    90deg,
-    transparent,
-    transparent 2px,
-    rgba(0,0,0,0.3) 2px,
-    rgba(0,0,0,0.3) 4px
-  );
-  border-radius: 2px;
-}
-
 /* Desktop layout */
 @media (min-width: 768px) {
   .card-front {
@@ -316,18 +286,6 @@
   .card-brand svg {
     width: 32px;
     height: 32px;
-  }
-  
-  .card-chip {
-    width: 40px;
-    height: 30px;
-    bottom: var(--spacing-lg);
-    left: var(--spacing-lg);
-  }
-  
-  .card-chip::before {
-    width: 20px;
-    height: 16px;
   }
 }
 
