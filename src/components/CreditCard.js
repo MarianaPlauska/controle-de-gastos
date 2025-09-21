@@ -7,6 +7,20 @@ import './CreditCard.css';
 const CreditCard = ({ onSettingsClick }) => {
   const { cardData, getTotalSpent, getAvailableLimit, getUsagePercentage } = useCard();
 
+  const cardColors = {
+    red: '#dc2626',
+    blue: '#2563eb',
+    green: '#16a34a',
+    purple: '#9333ea',
+    orange: '#ea580c',
+    pink: '#db2777',
+    gray: '#6b7280'
+  };
+
+  const getCardColor = () => {
+    return cardColors[cardData?.color] || cardColors.red;
+  };
+
   const getUsageColor = (percentage) => {
     if (percentage >= 90) return '#ef4444';
     if (percentage >= 75) return '#f97316';
@@ -23,11 +37,11 @@ const CreditCard = ({ onSettingsClick }) => {
   return (
     <div className="credit-card-container">
       <div className="credit-card">
-        <div className="card-front">
+        <div className="card-front" style={{ background: `linear-gradient(135deg, ${getCardColor()}, ${getCardColor()}dd)` }}>
           <div className="card-header">
             <div className="card-brand">
               <CreditCardIcon size={32} />
-              <span>VR Card</span>
+              <span>{cardData?.name || 'Meu Cartão'}</span>
             </div>
             <button 
               className="card-settings-button"

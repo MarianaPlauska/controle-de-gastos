@@ -7,17 +7,29 @@
 :root {
   --primary-color: #2563eb;
   --primary-dark: #1d4ed8;
+  --primary-hover: #1e40af;
+  --primary-light: #dbeafe;
   --secondary-color: #64748b;
+  --secondary-hover: #475569;
   --success-color: #22c55e;
+  --success-hover: #16a34a;
   --warning-color: #f59e0b;
   --danger-color: #ef4444;
+  --danger-hover: #dc2626;
+  --danger-light: #fecaca;
+  --info-color: #06b6d4;
   --background: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --bg-hover: #e2e8f0;
   --surface: #ffffff;
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
   --text-primary: #1e293b;
   --text-secondary: #64748b;
   --border: #e2e8f0;
-  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --border-color: #e2e8f0;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
   --radius: 16px;
   --radius-lg: 20px;
   --spacing-xs: 8px;
@@ -29,12 +41,17 @@
 
 .dark-theme {
   --background: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-hover: #334155;
   --surface: #1e293b;
+  --card-bg: #1e293b;
+  --input-bg: #334155;
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
   --border: #334155;
-  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+  --border-color: #334155;
+  --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
 }
 
 body {
@@ -73,7 +90,7 @@ body {
     gap: var(--spacing-xl);
     align-items: start;
   }
-  
+
   .main-content {
     padding: 0 var(--spacing-lg) var(--spacing-xl);
   }
@@ -103,8 +120,98 @@ body {
   .credit-card-container {
     order: 1;
   }
-  
+
   .expense-form-container {
     order: 2;
   }
-} 
+}
+
+/* Grid para funcionalidades extras */
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Estilos para PWA */
+@media (display-mode: standalone) {
+  .App {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Melhorias para mobile */
+@media (max-width: 767px) {
+  .main-content {
+    padding: 0 12px 24px;
+  }
+
+  .features-grid {
+    gap: 16px;
+  }
+}
+
+/* E
+stilos para as novas telas */
+.cards-view,
+.reminders-view,
+.todos-view {
+  padding: 20px 20px 100px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.screen-header {
+  margin-bottom: 25px;
+}
+
+.screen-header h1 {
+  font-size: 1.8rem;
+  color: #1e293b;
+  margin: 0 0 5px 0;
+  font-weight: 700;
+}
+
+.screen-header p {
+  color: #64748b;
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Ajustes para o layout mobile-first */
+.main-content {
+  padding: 0;
+  margin-bottom: 80px;
+}
+
+/* Remover padding bottom do body que foi adicionado no BottomNavigation.css */
+body {
+  padding-bottom: 0;
+}
+
+@media (max-width: 768px) {
+
+  .cards-view,
+  .reminders-view,
+  .todos-view {
+    padding: 15px 15px 100px 15px;
+  }
+
+  .screen-header h1 {
+    font-size: 1.5rem;
+  }
+}

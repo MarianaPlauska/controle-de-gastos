@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, DollarSign, Calendar, Tag, FileText } from 'lucide-react';
 import { useCard } from '../contexts/CardContext';
+import { useNavigation } from '../contexts/NavigationContext';
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
-  const { cardData, getAvailableLimit, addExpense } = useCard();
+const ExpenseForm = ({ defaultCategory }) => {
+  const { getAvailableLimit, addExpense } = useCard();
+  const { expenseCategories } = useNavigation();
+  
   const [formData, setFormData] = useState({
     description: '',
     amount: '',
     date: new Date().toISOString().split('T')[0],
-    category: 'almoco'
+    category: defaultCategory || 'geral'
   });
 
-  const categories = [
-    { value: 'almoco_baratinho', label: 'Almoço baratinho', color: '#4CAF50' },
-    { value: 'almoco', label: 'Almoço', color: '#2196F3' },
-    { value: 'lanche', label: 'Lanche', color: '#FFC107' },
-    { value: 'fast_food', label: 'Fast-food', color: '#FF5722' },
-    { value: 'lanche_sobremesa', label: 'Lanche com sobremesa', color: '#E91E63' },
-    { value: 'aproveitar_vida', label: 'Aproveitar a vida', color: '#9C27B0' }
-  ];
+  useEffect(() => {
+    if (defaultCategory) {
+      setFormData(prev => ({ ...prev, category: defaultCategory }));
+    }
+  }, [defaultCategory]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ const ExpenseForm = () => {
       description: '',
       amount: '',
       date: new Date().toISOString().split('T')[0],
-      category: 'almoco'
+      category: defaultCategory || 'geral'
     });
   };
 
@@ -118,9 +118,9 @@ const ExpenseForm = () => {
               onChange={handleChange}
               required
             >
-              {categories.map(category => (
-                <option key={category.value} value={category.value}>
-                  {category.label}
+              {Object.entries(expenseCategories).map(([key, label]) => (
+                <option key={key} value={key}>
+                  {label}
                 </option>
               ))}
             </select>
