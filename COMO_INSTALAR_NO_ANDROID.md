@@ -227,4 +227,4 @@ Agora você tem um **ASSISTENTE PESSOAL COMPLETO** no seu bolso!
 
 ---
 
-*Desenvolvido com ❤️ para ser seu companheiro diário de organização e bem-estar!*
+*Desenvolvido com ❤️ para ser seu companheiro diário de organização e bem-esta

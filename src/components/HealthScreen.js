@@ -3,6 +3,7 @@ import { useHealth } from '../contexts/HealthContext';
 import WaterTracker from './WaterTracker';
 import ExerciseTracker from './ExerciseTracker';
 import FoodTracker from './FoodTracker';
+import HealthHistory from './HealthHistory';
 import { 
   Heart, 
   Droplets, 
@@ -22,7 +23,8 @@ const HealthScreen = () => {
     { id: 'overview', label: 'Resumo', icon: Heart },
     { id: 'water', label: 'Água', icon: Droplets },
     { id: 'exercise', label: 'Exercícios', icon: Dumbbell },
-    { id: 'food', label: 'Alimentação', icon: Utensils }
+    { id: 'food', label: 'Alimentação', icon: Utensils },
+    { id: 'history', label: 'Histórico', icon: TrendingUp }
   ];
 
   const getTodayStats = () => {
@@ -271,6 +273,7 @@ const HealthScreen = () => {
         {activeTab === 'water' && <WaterTracker />}
         {activeTab === 'exercise' && <ExerciseTracker />}
         {activeTab === 'food' && <FoodTracker />}
+        {activeTab === 'history' && <HealthHistory />}
       </div>
     </div>
   );

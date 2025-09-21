@@ -220,7 +220,7 @@ const ExerciseTracker = () => {
             
             <input
               type="text"
-              placeholder="Nome do exercício"
+              placeholder="Nome do exercício (ex: Corrida no parque, Flexões, Yoga matinal)"
               value={newExercise.name}
               onChange={(e) => setNewExercise({...newExercise, name: e.target.value})}
               required
@@ -254,10 +254,10 @@ const ExerciseTracker = () => {
             </div>
             
             <textarea
-              placeholder="Observações (opcional)"
+              placeholder="Observações (opcional) - Descreva o que você fez: séries, repetições, intensidade, como se sentiu..."
               value={newExercise.notes}
               onChange={(e) => setNewExercise({...newExercise, notes: e.target.value})}
-              rows="3"
+              rows="4"
             />
             
             <div className="form-actions">

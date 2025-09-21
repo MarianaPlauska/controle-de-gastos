@@ -39,9 +39,11 @@ const AppContent = () => {
               <p>Gerencie seus cartões de crédito</p>
             </div>
             <LimitAlert />
-            <CardSelector />
-            <div className="card-section">
-              <CreditCard onSettingsClick={() => setShowSettings(true)} />
+            <div className="cards-main-content">
+              <CardSelector />
+              <div className="active-card-details">
+                <CreditCard onSettingsClick={() => setShowSettings(true)} />
+              </div>
             </div>
           </div>
         );

@@ -1,248 +1,295 @@
 .home-screen {
-  padding: 20px;
-  max-width: 1200px;
+  padding: 16px 16px 100px 16px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
-.welcome-section {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 20px;
-  padding: 30px;
-  color: white;
-  margin-bottom: 30px;
-  position: relative;
-  overflow: hidden;
+/* Header compacto */
+.home-header {
+  margin-bottom: 24px;
 }
 
-.welcome-section::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
-}
-
-.welcome-content {
-  position: relative;
-  z-index: 2;
-  margin-bottom: 20px;
-}
-
-.welcome-content h1 {
-  font-size: 2rem;
-  margin: 0 0 10px 0;
+.greeting h1 {
+  font-size: 1.5rem;
+  margin: 0 0 4px 0;
   font-weight: 700;
+  color: #1e293b;
 }
 
-.welcome-content p {
-  font-size: 1.1rem;
-  opacity: 0.9;
+.greeting p {
+  font-size: 0.95rem;
+  color: #64748b;
   margin: 0;
 }
 
-.welcome-stats {
-  display: flex;
-  gap: 20px;
-  position: relative;
-  z-index: 2;
+/* Seção de atalhos */
+.shortcuts-section {
+  margin-bottom: 24px;
 }
 
-.stat-card {
+.shortcuts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.shortcuts-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+}
+
+.edit-shortcuts-btn {
+  background: #f1f5f9;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.edit-shortcuts-btn:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+/* Editor de atalhos */
+.shortcut-editor {
+  background: #f8fafc;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #e2e8f0;
+}
+
+.shortcut-editor p {
+  margin: 0 0 12px 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.shortcut-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.shortcut-option {
   display: flex;
   align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.shortcut-option:hover {
+  border-color: #8b5cf6;
+}
+
+.shortcut-option.selected {
+  border-color: #8b5cf6;
+  background: #f3f4f6;
+  color: #8b5cf6;
+}
+
+/* Grid de atalhos */
+.shortcuts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 12px;
-  background: rgba(255, 255, 255, 0.15);
-  padding: 15px 20px;
+}
+
+.shortcut-card {
+  background: #ffffff;
   border-radius: 12px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f1f5f9;
 }
 
-.stat-card div {
+.shortcut-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+.shortcut-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  color: white;
 }
 
-.stat-label {
-  font-size: 0.8rem;
-  opacity: 0.8;
-}
-
-.stat-value {
+.shortcut-content h3 {
   font-size: 1rem;
   font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 4px 0;
 }
 
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.menu-item {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 25px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  color: white;
-}
-
-.menu-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: inherit;
-  opacity: 0.9;
-  z-index: 1;
-}
-
-.menu-item > * {
-  position: relative;
-  z-index: 2;
-}
-
-.menu-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-}
-
-.menu-icon {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 15px;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  flex-shrink: 0;
-}
-
-.menu-content {
-  flex: 1;
-}
-
-.menu-content h3 {
-  margin: 0 0 5px 0;
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-.menu-content p {
+.shortcut-content p {
+  font-size: 0.8rem;
+  color: #64748b;
   margin: 0;
-  opacity: 0.9;
+  line-height: 1.3;
+}
+
+/* Estado vazio */
+.no-shortcuts {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 32px 16px;
+  color: #64748b;
+}
+
+.no-shortcuts svg {
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.no-shortcuts p {
+  margin: 0 0 12px 0;
   font-size: 0.95rem;
 }
 
-.menu-arrow {
-  font-size: 1.5rem;
-  font-weight: bold;
-  opacity: 0.7;
-  transition: transform 0.3s ease;
+.no-shortcuts button {
+  background: #8b5cf6;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
-.menu-item:hover .menu-arrow {
-  transform: translateX(5px);
-}
+/* Ações rápidas na parte inferior */
 
 .quick-actions {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 25px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.quick-actions h3 {
-  margin: 0 0 20px 0;
-  color: #1e293b;
-  font-size: 1.2rem;
+  position: fixed;
+  bottom: 80px;
+  left: 16px;
+  right: 16px;
+  z-index: 100;
 }
 
 .quick-buttons {
   display: flex;
-  gap: 15px;
-  flex-wrap: wrap;
+  justify-content: space-around;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid #f1f5f9;
 }
 
 .quick-btn {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
+  gap: 4px;
+  padding: 12px 8px;
   border: none;
-  border-radius: 10px;
+  background: none;
   cursor: pointer;
-  font-size: 0.95rem;
+  font-size: 0.75rem;
   font-weight: 500;
   transition: all 0.2s ease;
-  color: white;
-}
-
-.quick-btn.expenses {
-  background: linear-gradient(135deg, #ef4444, #dc2626);
-}
-
-.quick-btn.health {
-  background: linear-gradient(135deg, #06b6d4, #0891b2);
-}
-
-.quick-btn.reminders {
-  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #64748b;
+  border-radius: 12px;
+  min-width: 60px;
 }
 
 .quick-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+.quick-btn.expenses:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.quick-btn.health:hover {
+  background: rgba(6, 182, 212, 0.1);
+  color: #06b6d4;
+}
+
+.quick-btn.reminders:hover {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+}
+
+.quick-btn.todos:hover {
+  background: rgba(34, 197, 94, 0.1);
+  color: #22c55e;
+}
+
+.quick-btn span {
+  font-size: 0.7rem;
 }
 
 @media (max-width: 768px) {
   .home-screen {
-    padding: 15px;
+    padding: 12px 12px 100px 12px;
   }
   
-  .welcome-section {
-    padding: 20px;
-  }
-  
-  .welcome-content h1 {
-    font-size: 1.5rem;
-  }
-  
-  .welcome-stats {
-    flex-direction: column;
+  .shortcuts-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
   }
   
-  .menu-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
+  .shortcut-card {
+    padding: 12px;
   }
   
-  .menu-item {
-    padding: 20px;
+  .shortcut-icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 8px;
+  }
+  
+  .shortcut-content h3 {
+    font-size: 0.9rem;
+  }
+  
+  .shortcut-content p {
+    font-size: 0.75rem;
+  }
+  
+  .shortcut-options {
+    gap: 6px;
+  }
+  
+  .shortcut-option {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  
+  .quick-actions {
+    bottom: 70px;
+    left: 12px;
+    right: 12px;
   }
   
   .quick-buttons {
-    flex-direction: column;
+    padding: 8px;
   }
   
   .quick-btn {
-    justify-content: center;
+    padding: 8px 4px;
+    min-width: 50px;
   }
 }

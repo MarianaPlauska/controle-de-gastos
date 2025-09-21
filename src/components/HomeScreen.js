@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useUser } from '../contexts/UserContext';
 import { useNavigation } from '../contexts/NavigationContext';
 import { 
@@ -7,19 +7,31 @@ import {
   CheckSquare, 
   FileText, 
   ShoppingCart,
-  PiggyBank,
   Calendar,
-  Target,
   Heart,
   Droplets,
   Dumbbell,
-  Settings
+  Settings,
+  Plus,
+  Edit3
 } from 'lucide-react';
 import './HomeScreen.css';
 
 const HomeScreen = () => {
-  const { user } = useUser();
+  const { user, updateUser } = useUser();
   const { navigateTo } = useNavigation();
+  const [showShortcutEditor, setShowShortcutEditor] = useState(false);
+
+  // Atalhos salvos do usuário (padrão: gastos e saúde)
+  const [userShortcuts, setUserShortcuts] = useState(() => {
+    const saved = localStorage.getItem('userShortcuts');
+    return saved ? JSON.parse(saved) : ['expenses', 'health'];
+  });
+
+  const saveShortcuts = (shortcuts) => {
+    setUserShortcuts(shortcuts);
+    localStorage.setItem('userShortcuts', JSON.stringify(shortcuts));
+  };
 
   const getGreeting = () => {
     const hour = new Date().getHours();
@@ -79,79 +91,126 @@ const HomeScreen = () => {
     }
   ];
 
+  const availableShortcuts = menuItems.filter(item => 
+    userShortcuts.includes(item.id)
+  );
+
+  const toggleShortcut = (itemId) => {
+    const newShortcuts = userShortcuts.includes(itemId)
+      ? userShortcuts.filter(id => id !== itemId)
+      : [...userShortcuts, itemId];
+    saveShortcuts(newShortcuts);
+  };
+
   return (
     <div className="home-screen">
-      <div className="welcome-section">
-        <div className="welcome-content">
-          <h1>
-            {getGreeting()}, {user.name || 'Usuário'}! 👋
-          </h1>
-          <p>O que vamos organizar hoje?</p>
-        </div>
-        <div className="welcome-stats">
-          <div className="stat-card">
-            <PiggyBank size={24} />
-            <div>
-              <span className="stat-label">Controle</span>
-              <span className="stat-value">Financeiro</span>
-            </div>
-          </div>
-          <div className="stat-card">
-            <Target size={24} />
-            <div>
-              <span className="stat-label">Organização</span>
-              <span className="stat-value">Pessoal</span>
-            </div>
-          </div>
+      {/* Header compacto */}
+      <div className="home-header">
+        <div className="greeting">
+          <h1>{getGreeting()}, {user.name || 'Usuário'}! 👋</h1>
+          <p>O que vamos fazer hoje?</p>
         </div>
       </div>
 
-      <div className="menu-grid">
-        {menuItems.map(item => {
-          const IconComponent = item.icon;
-          return (
-            <div
-              key={item.id}
-              className="menu-item"
-              onClick={() => navigateTo(item.id)}
-              style={{ background: item.gradient }}
-            >
-              <div className="menu-icon">
-                <IconComponent size={32} />
-              </div>
-              <div className="menu-content">
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-              <div className="menu-arrow">→</div>
+      {/* Atalhos personalizáveis */}
+      <div className="shortcuts-section">
+        <div className="shortcuts-header">
+          <h2>Seus Atalhos</h2>
+          <button 
+            className="edit-shortcuts-btn"
+            onClick={() => setShowShortcutEditor(!showShortcutEditor)}
+          >
+            <Edit3 size={16} />
+          </button>
+        </div>
+
+        {showShortcutEditor && (
+          <div className="shortcut-editor">
+            <p>Escolha quais atalhos aparecem na tela inicial:</p>
+            <div className="shortcut-options">
+              {menuItems.map(item => {
+                const IconComponent = item.icon;
+                const isSelected = userShortcuts.includes(item.id);
+                return (
+                  <button
+                    key={item.id}
+                    className={`shortcut-option ${isSelected ? 'selected' : ''}`}
+                    onClick={() => toggleShortcut(item.id)}
+                  >
+                    <IconComponent size={20} />
+                    <span>{item.title}</span>
+                  </button>
+                );
+              })}
             </div>
-          );
-        })}
+          </div>
+        )}
+
+        <div className="shortcuts-grid">
+          {availableShortcuts.map(item => {
+            const IconComponent = item.icon;
+            return (
+              <div
+                key={item.id}
+                className="shortcut-card"
+                onClick={() => navigateTo(item.id)}
+              >
+                <div 
+                  className="shortcut-icon"
+                  style={{ backgroundColor: item.color }}
+                >
+                  <IconComponent size={24} />
+                </div>
+                <div className="shortcut-content">
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+                </div>
+              </div>
+            );
+          })}
+          
+          {availableShortcuts.length === 0 && (
+            <div className="no-shortcuts">
+              <Plus size={32} />
+              <p>Adicione seus atalhos favoritos</p>
+              <button onClick={() => setShowShortcutEditor(true)}>
+                Personalizar
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
+      {/* Ações rápidas sempre visíveis */}
       <div className="quick-actions">
-        <h3>Ações Rápidas</h3>
         <div className="quick-buttons">
           <button 
             className="quick-btn expenses"
             onClick={() => navigateTo('expenses')}
           >
-            <ShoppingCart size={20} />
-            Adicionar Gasto
+            <ShoppingCart size={18} />
+            <span>Gasto</span>
           </button>
           <button 
             className="quick-btn health"
             onClick={() => navigateTo('health')}
           >
-            <Droplets size={20} />
-            Beber Água
+            <Droplets size={18} />
+            <span>Água</span>
           </button>
           <button 
             className="quick-btn reminders"
             onClick={() => navigateTo('reminders')}
           >
-            <Calendar size={20} />
-            Novo Lembrete
+            <Bell size={18} />
+            <span>Lembrete</span>
+          </button>
+          <button 
+            className="quick-btn todos"
+            onClick={() => navigateTo('todos')}
+          >
+            <CheckSquare size={18} />
+            <span>Tarefa</span>
           </button>
         </div>
       </div>

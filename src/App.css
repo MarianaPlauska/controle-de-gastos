@@ -214,4 +214,37 @@ body {
   .screen-header h1 {
     font-size: 1.5rem;
   }
+}/* Esti
+los para as telas específicas */
+.cards-view,
+.reminders-view,
+.todos-view {
+  padding: 16px 16px 100px 16px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.cards-main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.active-card-details {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .cards-view,
+  .reminders-view,
+  .todos-view {
+    padding: 12px 12px 100px 12px;
+  }
+  
+  .active-card-details {
+    padding: 16px;
+  }
 }
