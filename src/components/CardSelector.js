@@ -77,17 +77,20 @@ const CardSelector = () => {
             step="0.01"
           />
           <div className="color-selector">
-            <label>Cor do cartão:</label>
+            <label>Escolha a cor do cartão:</label>
             <div className="color-options">
               {cardColors.map(color => (
-                <button
+                <div
                   key={color.value}
-                  type="button"
                   className={`color-option ${newCard.color === color.value ? 'selected' : ''}`}
-                  style={{ backgroundColor: color.color }}
                   onClick={() => setNewCard({...newCard, color: color.value})}
-                  title={color.label}
-                />
+                >
+                  <div 
+                    className="color-circle"
+                    style={{ backgroundColor: color.color }}
+                  />
+                  <span className="color-name">{color.label}</span>
+                </div>
               ))}
             </div>
           </div>

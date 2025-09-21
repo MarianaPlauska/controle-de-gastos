@@ -44,57 +44,78 @@
 }
 
 .color-options {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
 }
 
 .color-option {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 3px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  background: #f8fafc;
 }
 
 .color-option:hover {
-  transform: scale(1.1);
+  background: #f1f5f9;
+  transform: translateY(-1px);
 }
 
 .color-option.selected {
-  border-color: #1e293b;
-  transform: scale(1.1);
+  border-color: #2563eb;
+  background: #dbeafe;
+  transform: translateY(-1px);
+}
+
+.color-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border: 3px solid rgba(255, 255, 255, 0.8);
+}
+
+.color-name {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #1e293b;
+  text-align: center;
 }
 
 .cards-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
 }
 
 .card-item {
   display: flex;
-  align-items: center;
-  padding: 16px;
+  flex-direction: column;
+  padding: 20px;
   border: 2px solid transparent;
-  border-radius: 12px;
-  background: #f8fafc;
+  border-radius: 16px;
+  background: #ffffff;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .card-item:hover {
-  background: #f1f5f9;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
 
 .card-item.active {
   border-color: #2563eb;
+  box-shadow: 0 6px 25px rgba(37, 99, 235, 0.2);
   background: #ffffff;
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
 }
 
 .card-item.active {
@@ -106,7 +127,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .card-info {
@@ -118,15 +139,18 @@
 
 .card-info h4 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   color: #1e293b;
 }
 
 .card-color-indicator {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .btn-delete {
@@ -192,6 +216,11 @@
 @media (max-width: 768px) {
   .cards-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .card-item {
+    padding: 16px;
   }
   
   .color-options {

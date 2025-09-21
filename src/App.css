@@ -227,14 +227,24 @@ los para as telas específicas */
 .cards-main-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
 .active-card-details {
   background: #ffffff;
   border-radius: 16px;
-  padding: 20px;
+  padding: 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
+}
+
+@media (min-width: 1024px) {
+  .cards-main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
 }
 
 @media (max-width: 768px) {
@@ -242,6 +252,12 @@ los para as telas específicas */
   .reminders-view,
   .todos-view {
     padding: 12px 12px 100px 12px;
+  }
+  
+  .cards-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
   
   .active-card-details {
