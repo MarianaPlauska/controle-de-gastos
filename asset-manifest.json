@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/controle-de-gastos/static/css/main.2769b70d.css",
-    "main.js": "/controle-de-gastos/static/js/main.28f9a854.js",
+    "main.css": "/controle-de-gastos/static/css/main.8bd69485.css",
+    "main.js": "/controle-de-gastos/static/js/main.82fdd31a.js",
     "index.html": "/controle-de-gastos/index.html",
-    "main.2769b70d.css.map": "/controle-de-gastos/static/css/main.2769b70d.css.map",
-    "main.28f9a854.js.map": "/controle-de-gastos/static/js/main.28f9a854.js.map"
+    "main.8bd69485.css.map": "/controle-de-gastos/static/css/main.8bd69485.css.map",
+    "main.82fdd31a.js.map": "/controle-de-gastos/static/js/main.82fdd31a.js.map"
   },
   "entrypoints": [
-    "static/css/main.2769b70d.css",
-    "static/js/main.28f9a854.js"
+    "static/css/main.8bd69485.css",
+    "static/js/main.82fdd31a.js"
   ]
 }
