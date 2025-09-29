@@ -45,10 +45,7 @@ const CardSelector = () => {
   return (
     <div className="card-selector">
       <div className="section-header">
-        <h3>
-          <CreditCard size={20} />
-          Meus Cartões
-        </h3>
+        <h3>Meus Cartões</h3>
         <button 
           onClick={() => setShowAddForm(!showAddForm)}
           className="btn-add"

@@ -228,16 +228,8 @@ los para as telas específicas */
   margin: 0 auto;
 }
 
-.cards-main-content {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.active-card-details {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.card-info-section {
+  margin-bottom: 16px;
 }
 
 .card-expense-form,
@@ -245,6 +237,7 @@ los para as telas específicas */
   background: #ffffff;
   border-radius: 16px;
   padding: 20px;
+  margin-bottom: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #f1f5f9;
 }

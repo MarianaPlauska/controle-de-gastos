@@ -36,22 +36,24 @@ const AppContent = () => {
       case 'cards':
         return (
           <div className="cards-view">
-            <div className="screen-header">
-              <h1>Meus Cartões</h1>
-              <p>Gerencie seus cartões de crédito</p>
-            </div>
             <LimitAlert />
-            <div className="cards-main-content">
-              <CardSelector />
-              <div className="active-card-details">
-                <CreditCard onSettingsClick={() => setShowSettings(true)} />
-                <div className="card-expense-form">
-                  <ExpenseForm />
-                </div>
-                <div className="card-charts">
-                  <ChartsSection />
-                </div>
-              </div>
+            
+            {/* Informações do cartão no topo */}
+            <div className="card-info-section">
+              <CreditCard onSettingsClick={() => setShowSettings(true)} />
+            </div>
+            
+            {/* Formulário de gastos logo abaixo */}
+            <div className="card-expense-form">
+              <ExpenseForm />
+            </div>
+            
+            {/* Seletor de cartões */}
+            <CardSelector />
+            
+            {/* Gráficos na parte inferior */}
+            <div className="card-charts">
+              <ChartsSection />
             </div>
           </div>
         );
