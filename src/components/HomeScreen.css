@@ -178,67 +178,61 @@
 /* Ações rápidas na parte inferior */
 
 .quick-actions {
-  position: fixed;
-  bottom: 80px;
-  left: 16px;
-  right: 16px;
-  z-index: 100;
+  margin-top: 24px;
+  margin-bottom: 20px;
 }
 
 .quick-buttons {
-  display: flex;
-  justify-content: space-around;
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  border: 1px solid #f1f5f9;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
 
 .quick-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 12px 8px;
+  gap: 10px;
+  padding: 14px 16px;
   border: none;
-  background: none;
+  background: #ffffff;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 500;
   transition: all 0.2s ease;
-  color: #64748b;
+  color: #1e293b;
   border-radius: 12px;
-  min-width: 60px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
 }
 
 .quick-btn:hover {
-  background: #f8fafc;
-  color: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-.quick-btn.expenses:hover {
-  background: rgba(239, 68, 68, 0.1);
-  color: #ef4444;
+.quick-btn.expenses {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
 }
 
-.quick-btn.health:hover {
-  background: rgba(6, 182, 212, 0.1);
-  color: #06b6d4;
+.quick-btn.health {
+  background: linear-gradient(135deg, #06b6d4, #0891b2);
+  color: white;
 }
 
-.quick-btn.reminders:hover {
-  background: rgba(245, 158, 11, 0.1);
-  color: #f59e0b;
+.quick-btn.reminders {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
 }
 
-.quick-btn.todos:hover {
-  background: rgba(34, 197, 94, 0.1);
-  color: #22c55e;
+.quick-btn.todos {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: white;
 }
 
 .quick-btn span {
-  font-size: 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {
@@ -278,18 +272,17 @@
     font-size: 0.8rem;
   }
   
-  .quick-actions {
-    bottom: 70px;
-    left: 12px;
-    right: 12px;
-  }
-  
   .quick-buttons {
-    padding: 8px;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
   }
   
   .quick-btn {
-    padding: 8px 4px;
-    min-width: 50px;
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+  
+  .quick-btn span {
+    font-size: 0.85rem;
   }
 }

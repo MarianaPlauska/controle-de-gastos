@@ -12,13 +12,19 @@ import {
   Heart, 
   GraduationCap,
   Package,
-  MoreHorizontal
+  MoreHorizontal,
+  Settings,
+  Plus,
+  Edit3,
+  Save,
+  X
 } from 'lucide-react';
 import './ExpensesScreen.css';
 
 const ExpensesScreen = () => {
   const { currentExpenseCategory, setExpenseCategory, expenseCategories } = useNavigation();
   const { expenses } = useCard();
+  const [showCategoryEditor, setShowCategoryEditor] = useState(false);
 
   const categoryIcons = {
     geral: Package,
@@ -64,8 +70,18 @@ const ExpensesScreen = () => {
   return (
     <div className="expenses-screen">
       <div className="screen-header">
-        <h1>Controle de Gastos</h1>
-        <p>Organize seus gastos por categoria</p>
+        <div className="header-content">
+          <div>
+            <h1>Controle de Gastos</h1>
+            <p>Organize seus gastos por categoria</p>
+          </div>
+          <button 
+            className="category-settings-btn"
+            onClick={() => setShowCategoryEditor(!showCategoryEditor)}
+          >
+            <Settings size={16} />
+          </button>
+        </div>
       </div>
 
       <div className="categories-scroll">

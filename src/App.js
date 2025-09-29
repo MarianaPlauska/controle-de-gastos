@@ -10,6 +10,8 @@ import ExpensesScreen from './components/ExpensesScreen';
 import HealthScreen from './components/HealthScreen';
 import CardSelector from './components/CardSelector';
 import CreditCard from './components/CreditCard';
+import ExpenseForm from './components/ExpenseForm';
+import ChartsSection from './components/ChartsSection';
 import LimitAlert from './components/LimitAlert';
 import CardSettings from './components/CardSettings';
 import Reminders from './components/Reminders';
@@ -43,6 +45,12 @@ const AppContent = () => {
               <CardSelector />
               <div className="active-card-details">
                 <CreditCard onSettingsClick={() => setShowSettings(true)} />
+                <div className="card-expense-form">
+                  <ExpenseForm />
+                </div>
+                <div className="card-charts">
+                  <ChartsSection />
+                </div>
               </div>
             </div>
           </div>

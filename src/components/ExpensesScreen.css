@@ -7,20 +7,41 @@
 }
 
 .screen-header {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .screen-header h1 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #1e293b;
-  margin: 0 0 5px 0;
+  margin: 0 0 4px 0;
   font-weight: 700;
 }
 
 .screen-header p {
   color: #64748b;
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
+}
+
+.category-settings-btn {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  color: #64748b;
+  transition: all 0.2s ease;
+}
+
+.category-settings-btn:hover {
+  background: #e2e8f0;
+  color: #1e293b;
 }
 
 .categories-scroll {
@@ -40,15 +61,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 16px 12px;
+  gap: 6px;
+  padding: 12px 8px;
   background: #ffffff;
   border: 2px solid transparent;
-  border-radius: 16px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
-  min-width: 100px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  min-width: 80px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   text-align: center;
 }
 
@@ -64,9 +85,9 @@
 }
 
 .category-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -83,7 +104,7 @@
 
 .category-info h3 {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: 600;
   color: #1e293b;
   line-height: 1.2;
@@ -91,7 +112,7 @@
 
 .category-info p {
   margin: 0;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: #64748b;
   font-weight: 500;
 }
@@ -195,25 +216,25 @@
   }
   
   .categories-list {
-    gap: 8px;
+    gap: 6px;
   }
   
   .category-card {
-    min-width: 85px;
-    padding: 12px 8px;
+    min-width: 70px;
+    padding: 10px 6px;
   }
   
   .category-icon {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
   
   .category-info h3 {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
   
   .category-info p {
-    font-size: 0.7rem;
+    font-size: 0.65rem;
   }
   
   .category-header {
