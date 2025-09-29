@@ -12,7 +12,7 @@ const ExpenseForm = ({ defaultCategory }) => {
     description: '',
     amount: '',
     date: new Date().toISOString().split('T')[0],
-    category: defaultCategory || 'geral'
+    category: defaultCategory || 'almoco'
   });
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const ExpenseForm = ({ defaultCategory }) => {
       description: '',
       amount: '',
       date: new Date().toISOString().split('T')[0],
-      category: defaultCategory || 'geral'
+      category: defaultCategory || 'almoco'
     });
   };
 

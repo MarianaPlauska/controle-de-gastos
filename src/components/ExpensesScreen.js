@@ -27,36 +27,36 @@ const ExpensesScreen = () => {
   const [showCategoryEditor, setShowCategoryEditor] = useState(false);
 
   const categoryIcons = {
-    geral: Package,
-    mercado: ShoppingCart,
-    compras: Package,
-    transporte: Car,
-    alimentacao: Utensils,
-    lazer: Coffee,
-    saude: Heart,
-    educacao: GraduationCap
+    almoco: Utensils,
+    almoco_baratinho: Coffee,
+    lanche: Coffee,
+    fastfood: ShoppingCart,
+    almoco_sobremesa: Heart,
+    sobremesa: Heart,
+    viver_vida: Package,
+    geral: Package
   };
 
   const categoryColors = {
-    geral: '#64748b',
-    mercado: '#22c55e',
-    compras: '#8b5cf6',
-    transporte: '#3b82f6',
-    alimentacao: '#f59e0b',
-    lazer: '#ec4899',
-    saude: '#ef4444',
-    educacao: '#06b6d4'
+    almoco: '#f59e0b',
+    almoco_baratinho: '#22c55e',
+    lanche: '#8b5cf6',
+    fastfood: '#ef4444',
+    almoco_sobremesa: '#ec4899',
+    sobremesa: '#db2777',
+    viver_vida: '#06b6d4',
+    geral: '#64748b'
   };
 
   // Filtrar gastos por categoria
   const filteredExpenses = expenses.filter(expense => 
     expense.category === currentExpenseCategory || 
-    (!expense.category && currentExpenseCategory === 'geral')
+    (!expense.category && currentExpenseCategory === 'almoco')
   );
 
   const getTotalByCategory = (category) => {
     return expenses
-      .filter(expense => expense.category === category || (!expense.category && category === 'geral'))
+      .filter(expense => expense.category === category || (!expense.category && category === 'almoco'))
       .reduce((total, expense) => total + expense.amount, 0);
   };
 

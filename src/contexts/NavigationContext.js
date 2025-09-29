@@ -12,7 +12,7 @@ export const useNavigation = () => {
 
 export const NavigationProvider = ({ children }) => {
   const [currentView, setCurrentView] = useState('home');
-  const [currentExpenseCategory, setCurrentExpenseCategory] = useState('geral');
+  const [currentExpenseCategory, setCurrentExpenseCategory] = useState('almoco');
 
   const views = {
     home: 'Início',
@@ -26,14 +26,14 @@ export const NavigationProvider = ({ children }) => {
   };
 
   const expenseCategories = {
-    geral: 'Geral',
-    mercado: 'Mercado',
-    compras: 'Compras',
-    transporte: 'Transporte',
-    alimentacao: 'Alimentação',
-    lazer: 'Lazer',
-    saude: 'Saúde',
-    educacao: 'Educação'
+    almoco: 'Almoço',
+    almoco_baratinho: 'Almoço Baratinho',
+    lanche: 'Lanche',
+    fastfood: 'Fast-Food',
+    almoco_sobremesa: 'Almoço com Sobremesa',
+    sobremesa: 'Sobremesa',
+    viver_vida: 'Viver a Vida',
+    geral: 'Geral'
   };
 
   const navigateTo = (view) => {
