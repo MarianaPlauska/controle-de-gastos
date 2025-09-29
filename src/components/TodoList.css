@@ -1,9 +1,10 @@
 .todo-section {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
 }
 
 .todos-container {
@@ -26,24 +27,26 @@
 }
 
 .todo-form {
-  background: #f1f5f9;
-  padding: 16px;
-  border-radius: 8px;
-  margin-bottom: 16px;
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
+  border: 1px solid #e2e8f0;
 }
 
 .todo-form input,
 .todo-form textarea,
 .todo-form select {
-  padding: 8px 12px;
+  padding: 14px 16px;
   border: 2px solid #e2e8f0;
-  border-radius: 6px;
-  font-size: 0.9rem;
+  border-radius: 12px;
+  font-size: 1rem;
   background: #ffffff;
   color: #1e293b;
+  transition: all 0.2s ease;
 }
 
 .todo-form input:focus,
@@ -56,15 +59,19 @@
 .todo-item {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 12px;
-  border-radius: 8px;
-  background: #f1f5f9;
-  transition: all 0.2s;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #f8fafc;
+  transition: all 0.2s ease;
+  border: 1px solid #f1f5f9;
+  margin-bottom: 8px;
 }
 
 .todo-item:hover {
-  background: #e2e8f0;
+  background: #f1f5f9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .todo-item.completed {
@@ -157,4 +164,166 @@
 
 .btn-remove:hover {
   background: #fecaca;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.btn-add {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-add:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn-save {
+  flex: 1;
+  padding: 12px 20px;
+  background: #22c55e;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-save:hover {
+  background: #16a34a;
+}
+
+.btn-cancel {
+  flex: 1;
+  padding: 12px 20px;
+  background: #f1f5f9;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-cancel:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #64748b;
+  font-size: 1rem;
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+}
+
+/* Melhorar touch targets para mobile */
+.todo-checkbox {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-remove {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .todo-section {
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .section-header {
+    margin-bottom: 16px;
+  }
+  
+  .section-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .btn-add {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .todo-form {
+    padding: 16px;
+    gap: 12px;
+  }
+  
+  .todo-form input,
+  .todo-form textarea,
+  .todo-form select {
+    padding: 12px 14px;
+    font-size: 0.95rem;
+  }
+  
+  .todo-item {
+    padding: 14px;
+    gap: 12px;
+  }
+  
+  .todo-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  
+  .todo-category {
+    align-self: flex-start;
+  }
+  
+  .form-actions {
+    gap: 8px;
+  }
+  
+  .btn-save,
+  .btn-cancel {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
 }

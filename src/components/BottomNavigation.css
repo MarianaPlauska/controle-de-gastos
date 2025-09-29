@@ -3,56 +3,58 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.95);
   border-top: 1px solid #f1f5f9;
   display: flex;
   justify-content: space-around;
-  padding: 8px 16px calc(8px + env(safe-area-inset-bottom)) 16px;
+  padding: 6px 12px calc(6px + env(safe-area-inset-bottom)) 12px;
   z-index: 1000;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
-  backdrop-filter: blur(10px);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 10px 8px;
+  gap: 3px;
+  padding: 8px 6px;
   border: none;
   background: none;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   color: #64748b;
   font-size: 0.7rem;
   font-weight: 500;
-  min-width: 60px;
-  border-radius: 12px;
+  min-width: 56px;
+  border-radius: 16px;
   position: relative;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-item:hover {
   color: #2563eb;
-  background: rgba(37, 99, 235, 0.08);
-  transform: translateY(-2px);
+  background: rgba(37, 99, 235, 0.1);
+  transform: scale(1.05);
 }
 
 .nav-item.active {
   color: #2563eb;
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(139, 92, 246, 0.1));
-  transform: translateY(-2px);
+  transform: scale(1.05);
 }
 
 .nav-item.active::before {
   content: '';
   position: absolute;
-  top: -8px;
+  top: -6px;
   left: 50%;
   transform: translateX(-50%);
-  width: 24px;
-  height: 3px;
+  width: 20px;
+  height: 2px;
   background: linear-gradient(135deg, #2563eb, #8b5cf6);
-  border-radius: 0 0 3px 3px;
+  border-radius: 0 0 2px 2px;
 }
 
 .nav-item span {
@@ -62,16 +64,24 @@
 
 /* Adicionar espaço no body para a navegação */
 body {
-  padding-bottom: 80px;
+  padding-bottom: 75px;
 }
 
 @media (max-width: 480px) {
   .nav-item {
-    min-width: 50px;
-    padding: 6px 8px;
+    min-width: 48px;
+    padding: 6px 4px;
   }
   
   .nav-item span {
     font-size: 0.65rem;
+  }
+  
+  .bottom-navigation {
+    padding: 4px 8px calc(4px + env(safe-area-inset-bottom)) 8px;
+  }
+  
+  body {
+    padding-bottom: 70px;
   }
 }

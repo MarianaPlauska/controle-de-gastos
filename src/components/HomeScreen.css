@@ -1,12 +1,12 @@
 .home-screen {
-  padding: 16px 16px 100px 16px;
+  padding: 12px 12px 100px 12px;
   max-width: 100%;
   margin: 0 auto;
 }
 
 /* Header compacto */
 .home-header {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .greeting h1 {
@@ -24,7 +24,7 @@
 
 /* Seção de atalhos */
 .shortcuts-section {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .shortcuts-header {
@@ -178,8 +178,8 @@
 /* Ações rápidas na parte inferior */
 
 .quick-actions {
-  margin-top: 24px;
-  margin-bottom: 20px;
+  margin-top: 20px;
+  margin-bottom: 16px;
 }
 
 .quick-buttons {

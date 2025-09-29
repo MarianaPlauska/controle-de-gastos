@@ -36,48 +36,11 @@ const CreditCard = ({ onSettingsClick }) => {
 
   return (
     <div className="credit-card-container">
-      <div className="credit-card">
-        <div className="card-front" style={{ background: `linear-gradient(135deg, ${getCardColor()}, ${getCardColor()}dd)` }}>
-          <div className="card-header">
-            <div className="card-brand">
-              <CreditCardIcon size={32} />
-              <span>{cardData?.name || 'Meu Cartão'}</span>
-            </div>
-            <button 
-              className="card-settings-button"
-              onClick={onSettingsClick}
-              aria-label="Configurar cartão"
-            >
-              <Settings size={16} />
-            </button>
-          </div>
-          
-          <div className="card-content">
-            <div className="card-number">
-              {cardData?.cardNumber || '**** **** **** 1234'}
-            </div>
-            
-            <div className="card-details">
-              <div className="card-holder">
-                <span className="label">Titular</span>
-                <span className="value">{cardData?.cardHolder || 'SEU NOME'}</span>
-              </div>
-              <div className="card-expiry">
-                <span className="label">Válido até</span>
-                <span className="value">{cardData?.expiryDate || '12/25'}</span>
-              </div>
-            </div>
-          </div>
-          
-          {/* Chip do cartão */}
-          <div className="card-chip"></div>
-        </div>
-      </div>
-
+      {/* Informações do cartão primeiro */}
       <div className="card-info">
         <div className="limit-info">
           <div className="limit-header">
-            <h3>Limite do Cartão</h3>
+            <h3>{cardData?.name || 'Meu Cartão'}</h3>
             <span className="limit-amount">{formatCurrency(cardData?.limit || 500)}</span>
           </div>
           
@@ -108,6 +71,45 @@ const CreditCard = ({ onSettingsClick }) => {
           <span className="value">
             {formatDate(cardData?.nextRecharge)}
           </span>
+        </div>
+      </div>
+
+      {/* Cartão visual abaixo */}
+      <div className="credit-card">
+        <div className="card-front" style={{ background: `linear-gradient(135deg, ${getCardColor()}, ${getCardColor()}dd)` }}>
+          <div className="card-header">
+            <div className="card-brand">
+              <CreditCardIcon size={28} />
+              <span>{cardData?.name || 'Meu Cartão'}</span>
+            </div>
+            <button 
+              className="card-settings-button"
+              onClick={onSettingsClick}
+              aria-label="Configurar cartão"
+            >
+              <Settings size={14} />
+            </button>
+          </div>
+          
+          <div className="card-content">
+            <div className="card-number">
+              {cardData?.cardNumber || '**** **** **** 1234'}
+            </div>
+            
+            <div className="card-details">
+              <div className="card-holder">
+                <span className="label">Titular</span>
+                <span className="value">{cardData?.cardHolder || 'SEU NOME'}</span>
+              </div>
+              <div className="card-expiry">
+                <span className="label">Válido até</span>
+                <span className="value">{cardData?.expiryDate || '12/25'}</span>
+              </div>
+            </div>
+          </div>
+          
+          {/* Chip do cartão */}
+          <div className="card-chip"></div>
         </div>
       </div>
     </div>

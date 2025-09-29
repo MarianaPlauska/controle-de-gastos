@@ -176,20 +176,20 @@ stilos para as novas telas */
 }
 
 .screen-header {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .screen-header h1 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #1e293b;
-  margin: 0 0 5px 0;
+  margin: 0 0 4px 0;
   font-weight: 700;
 }
 
 .screen-header p {
   color: #64748b;
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 /* Ajustes para o layout mobile-first */
@@ -208,18 +208,22 @@ body {
   .cards-view,
   .reminders-view,
   .todos-view {
-    padding: 15px 15px 100px 15px;
+    padding: 10px 10px 100px 10px;
   }
 
   .screen-header h1 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+  }
+  
+  .screen-header {
+    margin-bottom: 16px;
   }
 }/* Esti
 los para as telas específicas */
 .cards-view,
 .reminders-view,
 .todos-view {
-  padding: 16px 16px 100px 16px;
+  padding: 12px 12px 100px 12px;
   max-width: 100%;
   margin: 0 auto;
 }
@@ -370,4 +374,119 @@ textarea:focus-visible {
 @keyframes shimmer {
   0% { left: -100%; }
   100% { left: 100%; }
+}/* Melhor
+ias para PWA nativa */
+@media (display-mode: standalone) {
+  .App {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  .header {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .bottom-navigation {
+    padding-bottom: calc(6px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Melhorar touch targets para mobile */
+button, .clickable {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Remover highlight azul no toque (iOS/Android) */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Permitir seleção de texto em inputs e áreas de texto */
+input, textarea, [contenteditable] {
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Melhorar scrolling no iOS */
+.scrollable {
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+/* Adicionar scrolling suave para categorias */
+.categories-scroll {
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+/* Melhorar performance de animações */
+.animated {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Adicionar feedback visual para todos os botões */
+button:not(:disabled) {
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:not(:disabled):active {
+  transform: scale(0.98);
+}
+
+/* Melhorar contraste para acessibilidade */
+@media (prefers-contrast: high) {
+  :root {
+    --border: #000000;
+    --text-secondary: #000000;
+  }
+}
+
+/* Respeitar preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Melhorar legibilidade em telas pequenas */
+@media (max-width: 480px) {
+  :root {
+    --spacing-xs: 6px;
+    --spacing-sm: 10px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+}
+
+/* Adicionar suporte para modo escuro do sistema */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f172a;
+    --bg-secondary: #1e293b;
+    --surface: #1e293b;
+    --text-primary: #f1f5f9;
+    --text-secondary: #94a3b8;
+  }
 }

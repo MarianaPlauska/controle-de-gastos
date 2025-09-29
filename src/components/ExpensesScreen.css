@@ -1,5 +1,5 @@
 .expenses-screen {
-  padding: 16px 16px 100px 16px;
+  padding: 12px 12px 100px 12px;
   max-width: 100%;
   margin: 0 auto;
   background: #f8fafc;
@@ -7,7 +7,7 @@
 }
 
 .screen-header {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .header-content {
@@ -45,9 +45,9 @@
 }
 
 .categories-scroll {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   overflow-x: auto;
-  padding: 0 0 8px 0;
+  padding: 0 0 6px 0;
 }
 
 .categories-list {
@@ -120,8 +120,8 @@
 .current-category {
   background: #ffffff;
   border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 18px;
+  margin-bottom: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #f1f5f9;
 }
@@ -154,7 +154,7 @@
 .expenses-content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
 .expense-form-section {
