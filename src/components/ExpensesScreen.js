@@ -1,9 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigation } from '../contexts/NavigationContext';
-import { useCard } from '../contexts/CardContext';
-import ExpenseForm from './ExpenseForm';
-import ExpenseList from './ExpenseList';
-import ChartsSection from './ChartsSection';
 import { 
   ShoppingCart, 
   Car, 
@@ -21,43 +17,183 @@ import {
 } from 'lucide-react';
 import './ExpensesScreen.css';
 
+// Componente para formulário de gastos gerais
+const GeneralExpenseForm = ({ category, onAddExpense, categoryColor }) => {
+  const [formData, setFormData] = useState({
+    description: '',
+    amount: '',
+    type: category === 'rendimento' ? 'income' : 'expense',
+    date: new Date().toISOString().split('T')[0]
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onAddExpense({
+      ...formData,
+      category,
+      amount: parseFloat(formData.amount)
+    });
+    setFormData({
+      description: '',
+      amount: '',
+      type: category === 'rendimento' ? 'income' : 'expense',
+      date: new Date().toISOString().split('T')[0]
+    });
+  };
+
+  const handleChange = (e) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="general-expense-form">
+      <h3>Adicionar {category === 'rendimento' ? 'Rendimento' : 'Gasto'}</h3>
+      
+      <div className="form-row">
+        <input
+          type="text"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          placeholder="Descrição"
+          required
+        />
+        <input
+          type="number"
+          name="amount"
+          value={formData.amount}
+          onChange={handleChange}
+          placeholder="Valor (R$)"
+          min="0.01"
+          step="0.01"
+          required
+        />
+      </div>
+
+      <div className="form-row">
+        <input
+          type="date"
+          name="date"
+          value={formData.date}
+          onChange={handleChange}
+          required
+        />
+        {(category === 'rendimento' || category === 'investimentos') && (
+          <select
+            name="type"
+            value={formData.type}
+            onChange={handleChange}
+          >
+            <option value="income">Entrada</option>
+            <option value="expense">Saída</option>
+          </select>
+        )}
+      </div>
+
+      <button 
+        type="submit" 
+        className="submit-btn"
+        style={{ backgroundColor: categoryColor }}
+      >
+        <Plus size={18} />
+        Adicionar
+      </button>
+    </form>
+  );
+};
+
+// Componente para lista de gastos gerais
+const GeneralExpenseList = ({ expenses }) => {
+  const formatCurrency = (value) => {
+    return new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(value);
+  };
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString('pt-BR');
+  };
+
+  return (
+    <div className="general-expense-list">
+      <h3>Histórico</h3>
+      <div className="expense-items">
+        {expenses.map(expense => (
+          <div key={expense.id} className={`expense-item ${expense.type}`}>
+            <div className="expense-info">
+              <h4>{expense.description}</h4>
+              <span className="expense-date">{formatDate(expense.date)}</span>
+            </div>
+            <div className={`expense-amount ${expense.type}`}>
+              {expense.type === 'income' ? '+' : '-'}{formatCurrency(expense.amount)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const ExpensesScreen = () => {
-  const { currentExpenseCategory, setExpenseCategory, expenseCategories } = useNavigation();
-  const { expenses } = useCard();
-  const [showCategoryEditor, setShowCategoryEditor] = useState(false);
+  const { navigateTo } = useNavigation();
+  const [currentCategory, setCurrentCategory] = useState('mercado');
+  const [generalExpenses, setGeneralExpenses] = useState(() => {
+    const saved = localStorage.getItem('generalExpenses');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // Categorias específicas para gastos gerais (não do cartão)
+  const generalCategories = {
+    mercado: 'Mercado',
+    lazer: 'Lazer',
+    compras: 'Compras',
+    rendimento: 'Rendimento',
+    investimentos: 'Investimentos',
+    economia: 'Economia'
+  };
 
   const categoryIcons = {
-    almoco: Utensils,
-    almoco_baratinho: Coffee,
-    lanche: Coffee,
-    fastfood: ShoppingCart,
-    almoco_sobremesa: Heart,
-    sobremesa: Heart,
-    viver_vida: Package,
-    geral: Package
+    mercado: ShoppingCart,
+    lazer: Coffee,
+    compras: Package,
+    rendimento: Heart,
+    investimentos: GraduationCap,
+    economia: Car
   };
 
   const categoryColors = {
-    almoco: '#f59e0b',
-    almoco_baratinho: '#22c55e',
-    lanche: '#8b5cf6',
-    fastfood: '#ef4444',
-    almoco_sobremesa: '#ec4899',
-    sobremesa: '#db2777',
-    viver_vida: '#06b6d4',
-    geral: '#64748b'
+    mercado: '#22c55e',
+    lazer: '#ec4899',
+    compras: '#8b5cf6',
+    rendimento: '#f59e0b',
+    investimentos: '#2563eb',
+    economia: '#06b6d4'
   };
 
   // Filtrar gastos por categoria
-  const filteredExpenses = expenses.filter(expense => 
-    expense.category === currentExpenseCategory || 
-    (!expense.category && currentExpenseCategory === 'almoco')
+  const filteredExpenses = generalExpenses.filter(expense => 
+    expense.category === currentCategory
   );
 
   const getTotalByCategory = (category) => {
-    return expenses
-      .filter(expense => expense.category === category || (!expense.category && category === 'almoco'))
-      .reduce((total, expense) => total + expense.amount, 0);
+    return generalExpenses
+      .filter(expense => expense.category === category)
+      .reduce((total, expense) => total + (expense.type === 'income' ? expense.amount : -expense.amount), 0);
+  };
+
+  const addGeneralExpense = (expense) => {
+    const newExpense = {
+      ...expense,
+      id: Date.now(),
+      date: expense.date || new Date().toISOString().split('T')[0]
+    };
+    const updatedExpenses = [...generalExpenses, newExpense];
+    setGeneralExpenses(updatedExpenses);
+    localStorage.setItem('generalExpenses', JSON.stringify(updatedExpenses));
   };
 
   const formatCurrency = (value) => {
@@ -75,27 +211,21 @@ const ExpensesScreen = () => {
             <h1>Controle de Gastos</h1>
             <p>Organize seus gastos por categoria</p>
           </div>
-          <button 
-            className="category-settings-btn"
-            onClick={() => setShowCategoryEditor(!showCategoryEditor)}
-          >
-            <Settings size={16} />
-          </button>
         </div>
       </div>
 
       <div className="categories-scroll">
         <div className="categories-list">
-          {Object.entries(expenseCategories).map(([key, label]) => {
+          {Object.entries(generalCategories).map(([key, label]) => {
             const IconComponent = categoryIcons[key] || MoreHorizontal;
-            const isActive = currentExpenseCategory === key;
+            const isActive = currentCategory === key;
             const total = getTotalByCategory(key);
             
             return (
               <div
                 key={key}
                 className={`category-card ${isActive ? 'active' : ''}`}
-                onClick={() => setExpenseCategory(key)}
+                onClick={() => setCurrentCategory(key)}
                 style={{ 
                   borderColor: isActive ? categoryColors[key] : '#e2e8f0',
                   background: isActive ? `${categoryColors[key]}15` : '#ffffff'
@@ -112,7 +242,7 @@ const ExpensesScreen = () => {
                 </div>
                 <div className="category-info">
                   <h3>{label}</h3>
-                  <p>{formatCurrency(total)}</p>
+                  <p>{formatCurrency(Math.abs(total))}</p>
                 </div>
               </div>
             );
@@ -123,41 +253,46 @@ const ExpensesScreen = () => {
       <div className="current-category">
         <div className="category-header">
           <div className="category-title">
-            {React.createElement(categoryIcons[currentExpenseCategory] || MoreHorizontal, { size: 24 })}
-            <h2>{expenseCategories[currentExpenseCategory]}</h2>
+            {React.createElement(categoryIcons[currentCategory] || MoreHorizontal, { size: 24 })}
+            <h2>{generalCategories[currentCategory]}</h2>
           </div>
           <div className="category-total">
-            {formatCurrency(getTotalByCategory(currentExpenseCategory))}
+            {formatCurrency(Math.abs(getTotalByCategory(currentCategory)))}
           </div>
         </div>
       </div>
 
       <div className="expenses-content">
         <div className="expense-form-section">
-          <ExpenseForm defaultCategory={currentExpenseCategory} />
+          <GeneralExpenseForm 
+            category={currentCategory} 
+            onAddExpense={addGeneralExpense}
+            categoryColor={categoryColors[currentCategory]}
+          />
         </div>
 
         {filteredExpenses.length > 0 && (
-          <>
-            <div className="charts-section">
-              <ChartsSection expenses={filteredExpenses} />
-            </div>
-            
-            <div className="expenses-list-section">
-              <ExpenseList expenses={filteredExpenses} />
-            </div>
-          </>
+          <div className="expenses-list-section">
+            <GeneralExpenseList expenses={filteredExpenses} />
+          </div>
         )}
 
         {filteredExpenses.length === 0 && (
           <div className="empty-category">
             <div className="empty-icon">
-              {React.createElement(categoryIcons[currentExpenseCategory] || MoreHorizontal, { size: 48 })}
+              {React.createElement(categoryIcons[currentCategory] || MoreHorizontal, { size: 48 })}
             </div>
-            <h3>Nenhum gasto em {expenseCategories[currentExpenseCategory]}</h3>
-            <p>Adicione seu primeiro gasto nesta categoria</p>
+            <h3>Nenhum registro em {generalCategories[currentCategory]}</h3>
+            <p>Adicione seu primeiro registro nesta categoria</p>
           </div>
         )}
+
+        <div className="navigation-tip">
+          <p>💡 Para gastos do cartão de crédito, acesse a aba "Cartões"</p>
+          <button onClick={() => navigateTo('cards')} className="nav-tip-btn">
+            Ir para Cartões
+          </button>
+        </div>
       </div>
     </div>
   );

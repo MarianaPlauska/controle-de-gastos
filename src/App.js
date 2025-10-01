@@ -71,8 +71,8 @@ const AppContent = () => {
         return (
           <div className="todos-view">
             <div className="screen-header">
-              <h1>Minhas Tarefas</h1>
-              <p>Organize suas atividades</p>
+              <h1>Minhas Anotações</h1>
+              <p>Organize suas ideias e lembretes</p>
             </div>
             <TodoList />
           </div>

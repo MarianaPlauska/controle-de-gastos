@@ -18,7 +18,7 @@ const BottomNavigation = () => {
     { id: 'expenses', icon: ShoppingCart, label: 'Gastos' },
     { id: 'cards', icon: CreditCard, label: 'Cartões' },
     { id: 'health', icon: Heart, label: 'Saúde' },
-    { id: 'todos', icon: CheckSquare, label: 'Tarefas' }
+    { id: 'todos', icon: CheckSquare, label: 'Anotações' }
   ];
 
   return (

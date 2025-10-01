@@ -22,157 +22,96 @@
   margin: 0;
 }
 
-/* Seção de atalhos */
-.shortcuts-section {
-  margin-bottom: 20px;
+/* Seção de estatísticas */
+.stats-section {
+  margin-bottom: 24px;
 }
 
-.shortcuts-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.shortcuts-header h2 {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #1e293b;
-  margin: 0;
-}
-
-.edit-shortcuts-btn {
-  background: #f1f5f9;
-  border: none;
-  padding: 8px;
-  border-radius: 8px;
-  cursor: pointer;
-  color: #64748b;
-  transition: all 0.2s ease;
-}
-
-.edit-shortcuts-btn:hover {
-  background: #e2e8f0;
-  color: #1e293b;
-}
-
-/* Editor de atalhos */
-.shortcut-editor {
-  background: #f8fafc;
-  padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 16px;
-  border: 1px solid #e2e8f0;
-}
-
-.shortcut-editor p {
-  margin: 0 0 12px 0;
-  font-size: 0.9rem;
-  color: #64748b;
-}
-
-.shortcut-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.shortcut-option {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 12px;
-  border: 2px solid #e2e8f0;
-  border-radius: 8px;
-  background: #ffffff;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: all 0.2s ease;
-}
-
-.shortcut-option:hover {
-  border-color: #8b5cf6;
-}
-
-.shortcut-option.selected {
-  border-color: #8b5cf6;
-  background: #f3f4f6;
-  color: #8b5cf6;
-}
-
-/* Grid de atalhos */
-.shortcuts-grid {
+.stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
 }
 
-.shortcut-card {
+.stat-card {
   background: #ffffff;
-  border-radius: 12px;
-  padding: 16px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   border: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
 }
 
-.shortcut-card:hover {
+.stat-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.12);
 }
 
-.shortcut-icon {
+.stat-icon {
   width: 48px;
   height: 48px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 12px;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
   color: white;
+  flex-shrink: 0;
 }
 
-.shortcut-content h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #1e293b;
+.stat-icon.available {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+.stat-icon.weekly {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-content h3 {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748b;
   margin: 0 0 4px 0;
 }
 
-.shortcut-content p {
+.stat-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 2px 0;
+}
+
+.stat-value.available {
+  color: #22c55e;
+}
+
+.stat-label {
   font-size: 0.8rem;
   color: #64748b;
-  margin: 0;
-  line-height: 1.3;
 }
 
-/* Estado vazio */
-.no-shortcuts {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 32px 16px;
-  color: #64748b;
+/* Seção de gráficos */
+.charts-section {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f1f5f9;
 }
 
-.no-shortcuts svg {
-  margin-bottom: 12px;
-  opacity: 0.5;
-}
-
-.no-shortcuts p {
-  margin: 0 0 12px 0;
-  font-size: 0.95rem;
-}
-
-.no-shortcuts button {
-  background: #8b5cf6;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.9rem;
+.charts-section h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0 0 16px 0;
 }
 
 /* Ações rápidas na parte inferior */
@@ -239,49 +178,44 @@
   .home-screen {
     padding: 12px 12px 100px 12px;
   }
-  
-  .shortcuts-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
-  
-  .shortcut-card {
-    padding: 12px;
+
+  .stat-card {
+    padding: 16px;
+    gap: 12px;
   }
-  
-  .shortcut-icon {
+
+  .stat-icon {
     width: 40px;
     height: 40px;
-    margin-bottom: 8px;
   }
-  
-  .shortcut-content h3 {
-    font-size: 0.9rem;
+
+  .stat-value {
+    font-size: 1.2rem;
   }
-  
-  .shortcut-content p {
-    font-size: 0.75rem;
+
+  .charts-section {
+    padding: 16px;
   }
-  
-  .shortcut-options {
-    gap: 6px;
+
+  .charts-section h2 {
+    font-size: 1.1rem;
   }
-  
-  .shortcut-option {
-    padding: 6px 10px;
-    font-size: 0.8rem;
-  }
-  
+
   .quick-buttons {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
-  
+
   .quick-btn {
     padding: 12px;
     font-size: 0.85rem;
   }
-  
+
   .quick-btn span {
     font-size: 0.85rem;
   }

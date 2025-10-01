@@ -20,8 +20,8 @@ export const NavigationProvider = ({ children }) => {
     cards: 'Cartões',
     health: 'Saúde',
     reminders: 'Lembretes',
-    todos: 'Tarefas',
-    notes: 'Anotações',
+    todos: 'Anotações',
+    notes: 'Notas',
     settings: 'Configurações'
   };
 
