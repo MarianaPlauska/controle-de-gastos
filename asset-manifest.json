@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/controle-de-gastos/static/js/main.727dbd1c.js",
+    "main.js": "/controle-de-gastos/static/js/main.e51db9b3.js",
     "index.html": "/controle-de-gastos/index.html",
-    "main.727dbd1c.js.map": "/controle-de-gastos/static/js/main.727dbd1c.js.map"
+    "main.e51db9b3.js.map": "/controle-de-gastos/static/js/main.e51db9b3.js.map"
   },
   "entrypoints": [
-    "static/js/main.727dbd1c.js"
+    "static/js/main.e51db9b3.js"
   ]
 }
