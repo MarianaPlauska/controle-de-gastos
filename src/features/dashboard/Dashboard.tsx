@@ -14,7 +14,12 @@ import {
 } from 'lucide-react';
 import { useCards } from '../cards/useCards';
 import { CardVisual } from '../cards/CardVisual';
+import { ExpenseForm } from '../expenses/ExpenseForm';
+import { BottomNav } from '../../components/BottomNav';
 
+// ============================================
+// ESTILOS
+// ============================================
 
 const Container = styled.div`
   min-height: 100vh;
@@ -296,15 +301,29 @@ const EmptyState = styled.div`
 // ============================================
 
 export const Dashboard: React.FC = () => {
-  const { activeCard, getCardStats } = useCards();
+  const { activeCard, getCardStats, expenses } = useCards();
   const stats = getCardStats();
   const [showBalance, setShowBalance] = useState(true);
+  const [showExpenseForm, setShowExpenseForm] = useState(false);
+  const [activeTab, setActiveTab] = useState('home');
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL'
     }).format(value);
+  };
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const today = new Date();
+    const isToday = date.toDateString() === today.toDateString();
+    
+    if (isToday) {
+      return `Hoje, ${date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`;
+    }
+    
+    return date.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
   };
 
   const getGreeting = () => {
@@ -315,118 +334,128 @@ export const Dashboard: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Header>
-        <HeaderTop>
-          <Logo>
-            <Wallet />
-            <span>FinControl</span>
-          </Logo>
-          <IconButton>
-            <Calendar size={20} />
-          </IconButton>
-        </HeaderTop>
-        
-        <Greeting>
-          <h1>{getGreeting()}!</h1>
-          <p>Gerencie suas finanças com inteligência</p>
-        </Greeting>
-      </Header>
-
-      <BalanceCard>
-        <BalanceHeader>
-          <BalanceLabel>Saldo disponível</BalanceLabel>
-          <IconButton onClick={() => setShowBalance(!showBalance)}>
-            {showBalance ? <Eye size={20} /> : <EyeOff size={20} />}
-          </IconButton>
-        </BalanceHeader>
-        
-        <BalanceAmount>
-          {showBalance ? formatCurrency(stats.availableLimit) : '••••••'}
-        </BalanceAmount>
-        
-        <BalanceActions>
-          <ActionButton variant="primary">
-            <Plus size={18} />
-            Adicionar
-          </ActionButton>
-          <ActionButton variant="secondary">
-            <TrendingUp size={18} />
-            Relatório
-          </ActionButton>
-        </BalanceActions>
-      </BalanceCard>
-
-      <Content>
-        <SectionTitle>Resumo</SectionTitle>
-        <StatsGrid>
-          <StatCard>
-            <StatIcon color="linear-gradient(135deg, #10b981, #059669)">
-              <ArrowUpRight size={20} />
-            </StatIcon>
-            <StatLabel>Limite Total</StatLabel>
-            <StatValue>{formatCurrency(activeCard.limit)}</StatValue>
-          </StatCard>
+    <>
+      <Container>
+        <Header>
+          <HeaderTop>
+            <Logo>
+              <Wallet />
+              <span>FinControl</span>
+            </Logo>
+            <IconButton>
+              <Calendar size={20} />
+            </IconButton>
+          </HeaderTop>
           
-          <StatCard>
-            <StatIcon color="linear-gradient(135deg, #ef4444, #dc2626)">
-              <ArrowDownRight size={20} />
-            </StatIcon>
-            <StatLabel>Gasto Total</StatLabel>
-            <StatValue>{formatCurrency(stats.totalSpent)}</StatValue>
-          </StatCard>
-          
-          <StatCard>
-            <StatIcon color="linear-gradient(135deg, #8b5cf6, #7c3aed)">
-              <CreditCard size={20} />
-            </StatIcon>
-            <StatLabel>Transações</StatLabel>
-            <StatValue>{stats.transactionCount}</StatValue>
-          </StatCard>
-          
-          <StatCard>
-            <StatIcon color="linear-gradient(135deg, #f97316, #ea580c)">
-              <DollarSign size={20} />
-            </StatIcon>
-            <StatLabel>Uso do Limite</StatLabel>
-            <StatValue>{stats.usagePercentage.toFixed(0)}%</StatValue>
-          </StatCard>
-        </StatsGrid>
+          <Greeting>
+            <h1>{getGreeting()}!</h1>
+            <p>Gerencie suas finanças com inteligência</p>
+          </Greeting>
+        </Header>
 
-        <CardSection>
-          <SectionTitle>Seu Cartão</SectionTitle>
-          <CardVisual card={activeCard} />
-        </CardSection>
+        <BalanceCard>
+          <BalanceHeader>
+            <BalanceLabel>Saldo disponível</BalanceLabel>
+            <IconButton onClick={() => setShowBalance(!showBalance)}>
+              {showBalance ? <Eye size={20} /> : <EyeOff size={20} />}
+            </IconButton>
+          </BalanceHeader>
+          
+          <BalanceAmount>
+            {showBalance ? formatCurrency(stats.availableLimit) : '••••••'}
+          </BalanceAmount>
+          
+          <BalanceActions>
+            <ActionButton variant="primary" onClick={() => setShowExpenseForm(true)}>
+              <Plus size={18} />
+              Adicionar
+            </ActionButton>
+            <ActionButton variant="secondary">
+              <TrendingUp size={18} />
+              Relatório
+            </ActionButton>
+          </BalanceActions>
+        </BalanceCard>
 
-        <TransactionsSection>
-          <SectionTitle>Últimas Transações</SectionTitle>
-          {stats.transactionCount === 0 ? (
-            <EmptyState>
-              <DollarSign />
-              <p>Nenhuma transação ainda</p>
-              <ActionButton variant="primary">
-                <Plus size={18} />
-                Adicionar primeira transação
-              </ActionButton>
-            </EmptyState>
-          ) : (
-            <>
-              <TransactionItem>
-                <TransactionIcon type="expense">
-                  <ArrowDownRight size={20} />
-                </TransactionIcon>
-                <TransactionInfo>
-                  <TransactionTitle>Almoço</TransactionTitle>
-                  <TransactionDate>Hoje, 12:30</TransactionDate>
-                </TransactionInfo>
-                <TransactionAmount type="expense">
-                  - R$ 45,00
-                </TransactionAmount>
-              </TransactionItem>
-            </>
-          )}
-        </TransactionsSection>
-      </Content>
-    </Container>
+        <Content>
+          <SectionTitle>Resumo</SectionTitle>
+          <StatsGrid>
+            <StatCard>
+              <StatIcon color="linear-gradient(135deg, #10b981, #059669)">
+                <ArrowUpRight size={20} />
+              </StatIcon>
+              <StatLabel>Limite Total</StatLabel>
+              <StatValue>{formatCurrency(activeCard.limit)}</StatValue>
+            </StatCard>
+            
+            <StatCard>
+              <StatIcon color="linear-gradient(135deg, #ef4444, #dc2626)">
+                <ArrowDownRight size={20} />
+              </StatIcon>
+              <StatLabel>Gasto Total</StatLabel>
+              <StatValue>{formatCurrency(stats.totalSpent)}</StatValue>
+            </StatCard>
+            
+            <StatCard>
+              <StatIcon color="linear-gradient(135deg, #8b5cf6, #7c3aed)">
+                <CreditCard size={20} />
+              </StatIcon>
+              <StatLabel>Transações</StatLabel>
+              <StatValue>{stats.transactionCount}</StatValue>
+            </StatCard>
+            
+            <StatCard>
+              <StatIcon color="linear-gradient(135deg, #f97316, #ea580c)">
+                <DollarSign size={20} />
+              </StatIcon>
+              <StatLabel>Uso do Limite</StatLabel>
+              <StatValue>{stats.usagePercentage.toFixed(0)}%</StatValue>
+            </StatCard>
+          </StatsGrid>
+
+          <CardSection>
+            <SectionTitle>Seu Cartão</SectionTitle>
+            <CardVisual card={activeCard} />
+          </CardSection>
+
+          <TransactionsSection>
+            <SectionTitle>Últimas Transações</SectionTitle>
+            {expenses.length === 0 ? (
+              <EmptyState>
+                <DollarSign />
+                <p>Nenhuma transação ainda</p>
+                <ActionButton variant="primary" onClick={() => setShowExpenseForm(true)}>
+                  <Plus size={18} />
+                  Adicionar primeira transação
+                </ActionButton>
+              </EmptyState>
+            ) : (
+              <>
+                {expenses.slice(0, 5).map((expense) => (
+                  <TransactionItem key={expense.id}>
+                    <TransactionIcon type="expense">
+                      <ArrowDownRight size={20} />
+                    </TransactionIcon>
+                    <TransactionInfo>
+                      <TransactionTitle>{expense.description}</TransactionTitle>
+                      <TransactionDate>{formatDate(expense.date)}</TransactionDate>
+                    </TransactionInfo>
+                    <TransactionAmount type="expense">
+                      - {formatCurrency(expense.amount)}
+                    </TransactionAmount>
+                  </TransactionItem>
+                ))}
+              </>
+            )}
+          </TransactionsSection>
+        </Content>
+      </Container>
+
+      <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
+      
+      {showExpenseForm && (
+        <ExpenseForm onClose={() => setShowExpenseForm(false)} />
+      )}
+    </>
   );
 };

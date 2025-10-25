@@ -1,15 +1,20 @@
+// ============================================
+// TIPOS DO SISTEMA
+// ============================================
+
 export interface Card {
   id: string;
   name: string;
   limit: number;
   color: CardColor;
-  cardNumber?: string;
-  cardHolder?: string;
-  expiryDate?: string;
-  nextRecharge?: string;
+  cardNumber: string;
+  cardHolder: string;
+  expiryDate: string;
+  dueDate: number; // Dia do vencimento (1-31)
+  nextRecharge: string; // Data da próxima recarga
 }
 
-export type CardColor = 'red' | 'blue' | 'green' | 'purple' | 'orange' | 'pink' | 'gray';
+export type CardColor = 'red' | 'purple' | 'blue' | 'green' | 'orange' | 'pink' | 'yellow' | 'teal';
 
 export interface Expense {
   id: string;
@@ -22,21 +27,14 @@ export interface Expense {
 }
 
 export type ExpenseCategory = 
-  | 'almoco'
-  | 'almoco_baratinho'
-  | 'lanche'
-  | 'fastfood'
-  | 'almoco_sobremesa'
-  | 'sobremesa'
-  | 'viver_vida'
-  | 'geral';
-
-export interface User {
-  id: string;
-  name: string;
-  email?: string;
-  avatar?: string;
-}
+  | 'food'
+  | 'transport'
+  | 'shopping'
+  | 'entertainment'
+  | 'health'
+  | 'education'
+  | 'bills'
+  | 'other';
 
 export interface CardStats {
   totalSpent: number;
@@ -44,3 +42,12 @@ export interface CardStats {
   usagePercentage: number;
   transactionCount: number;
 }
+
+export interface FinancialSummary {
+  totalIncome: number;
+  totalExpenses: number;
+  totalSaved: number;
+  savingsPercentage: number;
+}
+
+export type ViewType = 'dashboard' | 'cards' | 'expenses';

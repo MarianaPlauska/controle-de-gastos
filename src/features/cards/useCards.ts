@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Card, Expense, CardStats } from '../../types';
 
-
 const STORAGE_KEY = 'cards_data';
 const EXPENSES_KEY = 'expenses_data';
+const ACTIVE_CARD_KEY = 'active_card_id';
 
 export const useCards = () => {
   // Estado dos cartões
@@ -12,21 +12,21 @@ export const useCards = () => {
     if (saved) {
       return JSON.parse(saved);
     }
-    // Cartão padrão
     return [{
       id: '1',
       name: 'Cartão Principal',
-      limit: 500,
-      color: 'blue' as const,
+      limit: 1000,
+      color: 'red' as const,
       cardNumber: '**** **** **** 1234',
       cardHolder: 'SEU NOME',
-      expiryDate: '12/25',
-      nextRecharge: '2025-09-21'
+      expiryDate: '12/28',
+      dueDate: 10,
+      nextRecharge: '2025-11-10'
     }];
   });
 
   const [activeCardId, setActiveCardId] = useState<string>(() => {
-    return localStorage.getItem('active_card_id') || cards[0]?.id || '1';
+    return localStorage.getItem(ACTIVE_CARD_KEY) || cards[0]?.id || '1';
   });
 
   const [expenses, setExpenses] = useState<Expense[]>(() => {
@@ -34,7 +34,7 @@ export const useCards = () => {
     return saved ? JSON.parse(saved) : [];
   });
 
-  // Salvar no localStorage quando mudar
+  // Salvar no localStorage
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(cards));
   }, [cards]);
@@ -44,7 +44,7 @@ export const useCards = () => {
   }, [expenses]);
 
   useEffect(() => {
-    localStorage.setItem('active_card_id', activeCardId);
+    localStorage.setItem(ACTIVE_CARD_KEY, activeCardId);
   }, [activeCardId]);
 
   // Cartão ativo
@@ -62,7 +62,7 @@ export const useCards = () => {
 
   // Atualizar cartão
   const updateCard = useCallback((cardId: string, updates: Partial<Card>) => {
-    setCards(prev => prev.map(card => 
+    setCards(prev => prev.map(card =>
       card.id === cardId ? { ...card, ...updates } : card
     ));
   }, []);
@@ -74,8 +74,14 @@ export const useCards = () => {
       return;
     }
     setCards(prev => prev.filter(card => card.id !== cardId));
+    // Deletar gastos do cartão
+    setExpenses(prev => prev.filter(expense => expense.cardId !== cardId));
+    // Trocar para outro cartão se o ativo foi deletado
     if (activeCardId === cardId) {
-      setActiveCardId(cards.find(c => c.id !== cardId)?.id || cards[0].id);
+      const remainingCard = cards.find(c => c.id !== cardId);
+      if (remainingCard) {
+        setActiveCardId(remainingCard.id);
+      }
     }
   }, [cards, activeCardId]);
 
@@ -92,7 +98,7 @@ export const useCards = () => {
       cardId: activeCardId,
       createdAt: new Date().toISOString(),
     };
-    setExpenses(prev => [...prev, newExpense]);
+    setExpenses(prev => [newExpense, ...prev]);
   }, [activeCardId]);
 
   // Deletar gasto
@@ -119,7 +125,13 @@ export const useCards = () => {
   }, [activeCardId, expenses, cards]);
 
   // Gastos do cartão ativo
-  const activeCardExpenses = expenses.filter(e => e.cardId === activeCardId);
+  const activeCardExpenses = expenses
+    .filter(e => e.cardId === activeCardId)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  // Todos os gastos ordenados
+  const allExpensesSorted = expenses
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return {
     // Estado
@@ -127,18 +139,18 @@ export const useCards = () => {
     activeCard,
     activeCardId,
     expenses: activeCardExpenses,
-    allExpenses: expenses,
-    
+    allExpenses: allExpensesSorted,
+
     // Ações de cartão
     addCard,
     updateCard,
     deleteCard,
     switchCard,
-    
+
     // Ações de gasto
     addExpense,
     deleteExpense,
-    
+
     // Estatísticas
     getCardStats,
   };
