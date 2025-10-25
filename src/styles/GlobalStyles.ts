@@ -11,74 +11,55 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    scroll-behavior: smooth;
+  }
+
+  @media (max-width: 480px) {
+    html {
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    html {
+      font-size: 14px;
+    }
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #18181b;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
     min-height: 100vh;
+    transition: background-color 0.3s ease;
     overflow-x: hidden;
   }
 
-  /* Scrollbar moderna */
   ::-webkit-scrollbar {
     width: 8px;
-    height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.05);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(139, 92, 246, 0.5);
     border-radius: 4px;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  /* Seleção de texto */
   ::selection {
     background: rgba(139, 92, 246, 0.3);
-    color: #18181b;
   }
 
-  /* Foco acessível */
   *:focus-visible {
     outline: 2px solid #8b5cf6;
     outline-offset: 2px;
   }
 
-  /* Desabilitar tap highlight */
   * {
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Botões e inputs */
-  button, input, textarea, select {
-    font-family: inherit;
-  }
-
   button {
+    font-family: inherit;
     cursor: pointer;
-  }
-
-  /* Links */
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  /* Imagens */
-  img {
-    max-width: 100%;
-    height: auto;
   }
 `;

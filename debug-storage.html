@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug LocalStorage</title>
+</head>
+<body>
+    <h1>Debug LocalStorage - MyControl</h1>
+    <button onclick="showData()">Mostrar Dados</button>
+    <button onclick="clearData()">Limpar Dados</button>
+    <pre id="output"></pre>
+
+    <script>
+        function showData() {
+            const cards = localStorage.getItem('fincontrol_cards');
+            const expenses = localStorage.getItem('fincontrol_expenses');
+            const activeCard = localStorage.getItem('fincontrol_active_card');
+            
+            const output = document.getElementById('output');
+            output.textContent = `
+CARTÕES:
+${cards || 'Nenhum'}
+
+DESPESAS:
+${expenses || 'Nenhuma'}
+
+CARTÃO ATIVO:
+${activeCard || 'Nenhum'}
+            `;
+        }
+
+        function clearData() {
+            localStorage.removeItem('fincontrol_cards');
+            localStorage.removeItem('fincontrol_expenses');
+            localStorage.removeItem('fincontrol_active_card');
+            alert('Dados limpos! Recarregue a aplicação.');
+        }
+
+        // Mostrar automaticamente ao carregar
+        showData();
+    </script>
+</body>
+</html>

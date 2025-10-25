@@ -1,0 +1,212 @@
+.home-page {
+  padding: 1.5rem;
+  padding-bottom: 100px;
+  min-height: 100vh;
+}
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.theme-toggle-btn,
+.notification-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.theme-toggle-btn:hover,
+.notification-btn:hover {
+  transform: scale(1.05);
+}
+
+.theme-toggle-btn:active,
+.notification-btn:active {
+  transform: scale(0.95);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ef4444;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.summary-card {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.summary-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.summary-content span {
+  font-size: 0.875rem;
+}
+
+.summary-content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.recent-expenses {
+  margin-bottom: 2rem;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.add-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.add-btn:hover {
+  transform: scale(1.05);
+}
+
+.expense-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.expense-item {
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expense-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.expense-info h4 {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.expense-info span {
+  font-size: 0.875rem;
+}
+
+.expense-amount {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+@media (max-width: 480px) {
+  .home-page {
+    padding: 1rem;
+    padding-bottom: 90px;
+  }
+
+  .summary-cards {
+    gap: 0.75rem;
+  }
+
+  .summary-card {
+    padding: 1rem;
+  }
+
+  .summary-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .summary-content h3 {
+    font-size: 1.125rem;
+  }
+
+  .expense-item {
+    padding: 0.875rem;
+  }
+
+  .expense-info h4 {
+    font-size: 0.9375rem;
+  }
+
+  .expense-amount {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .summary-cards {
+    grid-template-columns: 1fr;
+  }
+}

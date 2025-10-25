@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste de Gastos</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        button { padding: 10px 20px; margin: 10px; }
+        pre { background: #f5f5f5; padding: 15px; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <h1>Teste de Gastos - MyControl</h1>
+    
+    <button onclick="addTestExpense()">Adicionar Gasto Teste</button>
+    <button onclick="showData()">Mostrar Dados</button>
+    <button onclick="clearAll()">Limpar Tudo</button>
+    
+    <h2>Dados Atuais:</h2>
+    <pre id="output"></pre>
+
+    <script>
+        function addTestExpense() {
+            // Pegar dados atuais
+            const cardsStr = localStorage.getItem('fincontrol_cards');
+            const expensesStr = localStorage.getItem('fincontrol_expenses');
+            const activeCardId = localStorage.getItem('fincontrol_active_card') || '1';
+            
+            const cards = cardsStr ? JSON.parse(cardsStr) : [];
+            const expenses = expensesStr ? JSON.parse(expensesStr) : [];
+            
+            // Criar novo gasto
+            const newExpense = {
+                id: Date.now().toString(),
+                cardId: activeCardId,
+                description: 'Teste de Gasto',
+                amount: 50.00,
+                category: 'almoco',
+                date: new Date().toISOString().split('T')[0],
+                createdAt: new Date().toISOString()
+            };
+            
+            // Adicionar ao array
+            expenses.unshift(newExpense);
+            
+            // Salvar
+            localStorage.setItem('fincontrol_expenses', JSON.stringify(expenses));
+            
+            alert('Gasto adicionado! Recarregue a aplicação.');
+            showData();
+        }
+        
+        function showData() {
+            const cards = localStorage.getItem('fincontrol_cards');
+            const expenses = localStorage.getItem('fincontrol_expenses');
+            const activeCard = localStorage.getItem('fincontrol_active_card');
+            
+            const output = document.getElementById('output');
+            output.textContent = `
+CARTÕES:
+${cards || 'Nenhum'}
+
+DESPESAS:
+${expenses || 'Nenhuma'}
+
+CARTÃO ATIVO:
+${activeCard || 'Nenhum'}
+            `;
+        }
+        
+        function clearAll() {
+            localStorage.clear();
+            alert('Tudo limpo! Recarregue a aplicação.');
+            showData();
+        }
+        
+        // Mostrar ao carregar
+        showData();
+    </script>
+</body>
+</html>

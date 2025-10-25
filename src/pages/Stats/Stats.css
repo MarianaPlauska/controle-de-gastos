@@ -1,0 +1,46 @@
+.stats-page {
+  padding: 1.5rem;
+  padding-bottom: 100px;
+  min-height: 100vh;
+}
+
+.stats-summary {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.summary-item {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.summary-item span {
+  font-size: 0.875rem;
+}
+
+.summary-item h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.chart-section {
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+}
+
+.chart-section h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.empty-chart {
+  text-align: center;
+  padding: 3rem 1rem;
+}

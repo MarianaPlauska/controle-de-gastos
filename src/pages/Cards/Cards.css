@@ -1,0 +1,381 @@
+.cards-page {
+  padding: 1.5rem;
+  padding-bottom: 100px;
+  min-height: 100vh;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.add-card-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  border: none;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.add-card-btn:hover {
+  transform: scale(1.05);
+}
+
+.wallet-container {
+  position: relative;
+  min-height: 140px;
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+}
+
+.wallet-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 16px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.wallet-card:hover {
+  transform: translateY(-4px) scale(0.98) !important;
+}
+
+.wallet-card.active {
+  cursor: default;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+.wallet-card-content {
+  position: relative;
+  z-index: 1;
+}
+
+.wallet-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.wallet-card-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.delete-card-btn {
+  background: rgba(239, 68, 68, 0.9);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-card-btn:hover {
+  background: #ef4444;
+  transform: scale(1.1);
+}
+
+.wallet-card-limit {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  opacity: 0.95;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card-stats {
+  padding: 1.5rem;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-row span:first-child {
+  font-size: 0.875rem;
+}
+
+.stat-row span:last-child {
+  font-size: 1.125rem;
+}
+
+.add-expense-btn {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 12px;
+  border: none;
+  color: white;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+}
+
+.add-expense-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+}
+
+@media (max-width: 480px) {
+  .cards-page {
+    padding: 1rem;
+    padding-bottom: 90px;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .wallet-container {
+    min-height: 120px;
+  }
+
+  .wallet-card {
+    padding: 1rem 1.25rem;
+  }
+
+  .wallet-card-name {
+    font-size: 1rem;
+  }
+
+  .wallet-card-limit {
+    font-size: 0.875rem;
+  }
+
+  .card-stats {
+    padding: 1.25rem;
+  }
+
+  .add-expense-btn {
+    padding: 0.875rem;
+    font-size: 0.9375rem;
+  }
+
+  .expense-card {
+    padding: 0.875rem;
+  }
+
+  .expense-header h4 {
+    font-size: 0.9375rem;
+  }
+
+  .expense-amount {
+    font-size: 1rem;
+  }
+
+  .expense-meta {
+    font-size: 0.8125rem;
+    gap: 0.75rem;
+  }
+}
+
+.usage-bar-section {
+  padding: 1.25rem;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+}
+
+.usage-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.external-usage-bar {
+  width: 100%;
+  height: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  margin-bottom: 0.75rem;
+}
+
+.external-usage-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease;
+  box-shadow: 0 0 20px currentColor;
+  min-width: 2%;
+  position: relative;
+}
+
+.external-usage-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.4), transparent);
+  border-radius: 10px 10px 0 0;
+}
+
+.usage-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.expenses-section {
+  margin-top: 1.5rem;
+}
+
+.expenses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.expense-card {
+  padding: 1rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s;
+}
+
+.expense-card:hover {
+  transform: translateX(4px);
+}
+
+.expense-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.expense-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.expense-header h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+.expense-amount {
+  font-size: 1.125rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.expense-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.875rem;
+}
+
+.expense-category {
+  font-weight: 500;
+}
+
+.expense-date {
+  font-size: 0.8125rem;
+}
+
+.delete-expense-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  border-radius: 8px;
+}
+
+.delete-expense-btn:hover {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444 !important;
+  transform: scale(1.1);
+}
+
+@media (max-width: 480px) {
+  .expense-card {
+    padding: 0.875rem;
+  }
+
+  .expense-header h4 {
+    font-size: 0.9375rem;
+  }
+
+  .expense-amount {
+    font-size: 1rem;
+  }
+
+  .expense-meta {
+    font-size: 0.8125rem;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .page-header h1 {
+    font-size: 1.375rem;
+  }
+
+  .wallet-container {
+    min-height: 100px;
+  }
+
+  .wallet-card {
+    padding: 0.875rem 1rem;
+  }
+
+  .wallet-card-name {
+    font-size: 0.9375rem;
+  }
+
+  .expense-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .expense-amount {
+    font-size: 0.9375rem;
+  }
+}
