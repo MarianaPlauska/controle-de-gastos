@@ -14,6 +14,28 @@ export const lightTheme = {
     hover: '#f5f5f5',
     shadow: 'rgba(0, 0, 0, 0.05)',
   },
+  bg: {
+    primary: '#f4f6f8',
+    secondary: '#ffffff',
+    tertiary: '#f5f5f5',
+    input: '#f0f2f5',
+    card: '#ffffff',
+  },
+  text: {
+    primary: '#1a1a1a',
+    secondary: '#666666',
+    tertiary: '#999999',
+  },
+  purple: {
+    primary: '#8257e6',
+    secondary: '#9d79ea',
+  },
+  danger: '#dc3545',
+  success: '#28a745',
+  warning: '#ffc107',
+  info: '#17a2b8',
+  border: '#e0e0e0',
+  shadow: 'rgba(0, 0, 0, 0.05)',
 };
 
 export const darkTheme = {
@@ -32,4 +54,26 @@ export const darkTheme = {
     hover: '#2c2c2c',
     shadow: 'rgba(0, 0, 0, 0.3)',
   },
+  bg: {
+    primary: '#121212',
+    secondary: '#1e1e1e',
+    tertiary: '#2c2c2c',
+    input: '#2c2c2c',
+    card: '#1e1e1e',
+  },
+  text: {
+    primary: '#e0e0e0',
+    secondary: '#a0a0a0',
+    tertiary: '#666666',
+  },
+  purple: {
+    primary: '#9d79ea',
+    secondary: '#b794f4',
+  },
+  danger: '#fa5252',
+  success: '#40c057',
+  warning: '#fab005',
+  info: '#15aabf',
+  border: '#333333',
+  shadow: 'rgba(0, 0, 0, 0.3)',
 };

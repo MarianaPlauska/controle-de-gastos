@@ -17,5 +17,27 @@ declare module 'styled-components' {
             hover: string;
             shadow: string;
         };
+        bg: {
+            primary: string;
+            secondary: string;
+            tertiary: string;
+            input: string;
+            card: string;
+        };
+        text: {
+            primary: string;
+            secondary: string;
+            tertiary: string;
+        };
+        purple: {
+            primary: string;
+            secondary: string;
+        };
+        danger: string;
+        success: string;
+        warning: string;
+        info: string;
+        border: string;
+        shadow: string;
     }
 }
