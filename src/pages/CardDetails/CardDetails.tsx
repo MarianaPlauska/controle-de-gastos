@@ -157,6 +157,21 @@ export const CardDetails: React.FC = () => {
         <PageContainer>
             <BackButton onClick={() => navigate('/cards')}>
                 <ArrowLeft size={20} />
+                Voltar para Carteira
+            </BackButton>
+
+            <Header>
+                <CardSection>
+                    <CreditCard
+                        name={card.name}
+                        nickname={card.nickname}
+                        lastDigits={card.lastDigits}
+                        limit={formatCurrency(card.limit)}
+                        brand={card.brand}
+                        color={card.color}
+                    />
+                    <ActionButton onClick={() => setIsEditingColor(true)}>
+                        Alterar Cor
                     </ActionButton>
                     {isEditingColor && (
                         <CardColorPicker
@@ -208,7 +223,7 @@ export const CardDetails: React.FC = () => {
                         Registrar Gasto neste Cartão
                     </ActionButton>
                 </StatsSection>
-            </Header >
+            </Header>
 
             <TransactionsSection>
                 <h2>Histórico de Gastos</h2>
@@ -237,6 +252,6 @@ export const CardDetails: React.FC = () => {
             <Modal isOpen={isExpenseModalOpen} onClose={() => setIsExpenseModalOpen(false)}>
                 <CardExpenseForm cardId={card.id} onClose={() => setIsExpenseModalOpen(false)} />
             </Modal>
-        </PageContainer >
+        </PageContainer>
     );
 };

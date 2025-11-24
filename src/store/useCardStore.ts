@@ -6,7 +6,6 @@ export interface CreditCard {
     name: string;
     nickname?: string;
     lastDigits: string;
-    lastDigits: string;
     limit: number;
     brand: string;
     color: string;

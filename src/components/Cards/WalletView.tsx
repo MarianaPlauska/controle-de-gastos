@@ -29,11 +29,27 @@ export const WalletView: React.FC = () => {
 
     return (
         <Container>
-            <Plus size={32} />
-            <span>Adicionar Cartão</span>
-        </AddCardButton>
-                </CardsGrid >
-            </Section >
+            <Section>
+                <SectionTitle>Cartões de Crédito</SectionTitle>
+                <CardsGrid>
+                    {cards.map((card) => (
+                        <CreditCard
+                            key={card.id}
+                            id={card.id}
+                            name={card.name}
+                            nickname={card.nickname}
+                            lastDigits={card.lastDigits}
+                            limit={formatCurrency(card.limit)}
+                            brand={card.brand}
+                            color={card.color}
+                        />
+                    ))}
+                    <AddCardButton onClick={() => setIsCreditModalOpen(true)}>
+                        <Plus size={32} />
+                        <span>Adicionar Cartão</span>
+                    </AddCardButton>
+                </CardsGrid>
+            </Section>
 
             <Section>
                 <SectionTitle>Vales & Benefícios</SectionTitle>
@@ -61,6 +77,6 @@ export const WalletView: React.FC = () => {
             <Modal isOpen={isVoucherModalOpen} onClose={() => setIsVoucherModalOpen(false)}>
                 <MealVoucherForm onClose={() => setIsVoucherModalOpen(false)} />
             </Modal>
-        </Container >
+        </Container>
     );
 };

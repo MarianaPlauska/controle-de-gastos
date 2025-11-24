@@ -115,7 +115,7 @@ export const NoteEditor: React.FC<NoteEditorProps> = ({ noteId }) => {
 
             {block.type === 'text' ? (
               <TextBlock
-                ref={(el) => blockRefs.current[block.id] = el}
+                ref={(el: HTMLTextAreaElement | null) => { blockRefs.current[block.id] = el; }}
                 value={block.content}
                 onChange={(e) => updateBlockContent(block.id, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(e, block.id, 'text')}
@@ -135,7 +135,7 @@ export const NoteEditor: React.FC<NoteEditorProps> = ({ noteId }) => {
                   onChange={() => toggleTodo(block.id)}
                 />
                 <input
-                  ref={(el) => blockRefs.current[block.id] = el}
+                  ref={(el: HTMLInputElement | null) => { blockRefs.current[block.id] = el; }}
                   type="text"
                   value={block.content}
                   className={block.checked ? 'checked' : ''}
