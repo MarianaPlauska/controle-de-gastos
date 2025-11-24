@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { X, Check } from 'lucide-react';
 import { Card, CardColor } from '../../types';
 import { useTheme } from '../../hooks/useTheme';
-import './CardEditor.css';
+import * as S from './styles';
 
 interface CardEditorProps {
   card: Card;
@@ -46,100 +46,95 @@ export const CardEditor: React.FC<CardEditorProps> = ({ card, onSave, onClose })
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" style={{ background: theme.bg.card }} onClick={(e) => e.stopPropagation()}>
-        <div className="modal-header" style={{ background: theme.bg.card, borderColor: theme.border }}>
-          <h2 style={{ color: theme.text.primary }}>Editar Cartão</h2>
-          <button className="close-btn" style={{ background: theme.bg.secondary, color: theme.text.secondary }} onClick={onClose}>
+    <S.Overlay onClick={onClose}>
+      <S.Modal onClick={(e) => e.stopPropagation()}>
+        <S.Header>
+          <S.Title>Editar Cartão</S.Title>
+          <S.CloseButton onClick={onClose}>
             <X size={20} />
-          </button>
-        </div>
+          </S.CloseButton>
+        </S.Header>
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label style={{ color: theme.text.primary }}>Nome do Cartão</label>
-            <input
+        <S.Form onSubmit={handleSubmit}>
+          <S.FormGroup>
+            <S.Label>Nome do Cartão</S.Label>
+            <S.Input
               type="text"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              style={{ background: theme.bg.secondary, color: theme.text.primary, borderColor: theme.border }}
               required
             />
-          </div>
+          </S.FormGroup>
 
-          <div className="form-group">
-            <label style={{ color: theme.text.primary }}>Limite (R$)</label>
-            <input
+          <S.FormGroup>
+            <S.Label>Limite (R$)</S.Label>
+            <S.Input
               type="number"
               step="0.01"
               min="0"
               value={formData.limit}
               onChange={(e) => setFormData({ ...formData, limit: e.target.value })}
-              style={{ background: theme.bg.secondary, color: theme.text.primary, borderColor: theme.border }}
               required
             />
-          </div>
+          </S.FormGroup>
 
-          <div className="form-group">
-            <label style={{ color: theme.text.primary }}>Titular (opcional)</label>
-            <input
+          <S.FormGroup>
+            <S.Label>Titular (opcional)</S.Label>
+            <S.Input
               type="text"
               value={formData.cardHolder}
               onChange={(e) => setFormData({ ...formData, cardHolder: e.target.value })}
               placeholder="Seu nome"
-              style={{ background: theme.bg.secondary, color: theme.text.primary, borderColor: theme.border }}
             />
-          </div>
+          </S.FormGroup>
 
-          <div className="form-group">
-            <label style={{ color: theme.text.primary }}>Últimos 4 dígitos (opcional)</label>
-            <input
+          <S.FormGroup>
+            <S.Label>Últimos 4 dígitos (opcional)</S.Label>
+            <S.Input
               type="text"
               value={formData.cardNumber}
               onChange={(e) => setFormData({ ...formData, cardNumber: e.target.value })}
               placeholder="1234"
               maxLength={4}
-              style={{ background: theme.bg.secondary, color: theme.text.primary, borderColor: theme.border }}
             />
-          </div>
+          </S.FormGroup>
 
-          <div className="form-group">
-            <label style={{ color: theme.text.primary }}>Dia do Vencimento</label>
-            <input
+          <S.FormGroup>
+            <S.Label>Dia do Vencimento</S.Label>
+            <S.Input
               type="number"
               min="1"
               max="31"
               value={formData.dueDate}
               onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
               placeholder="Ex: 10"
-              style={{ background: theme.bg.secondary, color: theme.text.primary, borderColor: theme.border }}
             />
-          </div>
+          </S.FormGroup>
 
-          <div className="form-group">
-            <label style={{ color: theme.text.primary }}>Cor do Cartão</label>
-            <div className="color-grid">
+          <S.FormGroup>
+            <S.Label>Cor do Cartão</S.Label>
+            <S.ColorGrid>
               {colors.map((color) => (
-                <button
+                <S.ColorOption
                   key={color.value}
                   type="button"
-                  className={`color-option ${formData.color === color.value ? 'selected' : ''}`}
-                  style={{ background: color.hex }}
+                  $color={color.hex}
+                  $selected={formData.color === color.value}
                   onClick={() => setFormData({ ...formData, color: color.value })}
                   aria-label={color.label}
                 >
-                  {formData.color === color.value && <Check size={16} />}
-                </button>
+                  {formData.color === color.value && <Check size={14} />}
+                </S.ColorOption>
               ))}
-            </div>
-          </div>
+            </S.ColorGrid>
+          </S.FormGroup>
 
-          <button type="submit" className="submit-btn" style={{ background: theme.purple.primary }}>
+          <S.SubmitButton type="submit">
             <Check size={20} />
             Salvar Alterações
-          </button>
-        </form>
-      </div>
-    </div>
+          </S.SubmitButton>
+        </S.Form>
+      </S.Modal>
+    </S.Overlay>
   );
 };

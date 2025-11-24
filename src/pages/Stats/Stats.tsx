@@ -3,7 +3,7 @@ import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveCo
 import { useCards } from '../../contexts/CardsContext';
 import { useTheme } from '../../hooks/useTheme';
 import { formatCurrency } from '../../utils/formatters';
-import './Stats.css';
+import * as S from './styles';
 
 export const Stats: React.FC = () => {
   const { allExpenses, getCardStats } = useCards();
@@ -34,24 +34,24 @@ export const Stats: React.FC = () => {
   const COLORS = ['#8b5cf6', '#3b82f6', '#10b981', '#f59e0b', '#ef4444'];
 
   return (
-    <div className="stats-page" style={{ background: theme.bg.primary }}>
-      <header className="page-header">
-        <h1 style={{ color: theme.text.primary }}>Estatísticas</h1>
-      </header>
+    <S.Container>
+      <S.Header>
+        <S.Title>Estatísticas</S.Title>
+      </S.Header>
 
-      <div className="stats-summary">
-        <div className="summary-item" style={{ background: theme.bg.card, boxShadow: theme.shadow }}>
-          <span style={{ color: theme.text.secondary }}>Total Gasto</span>
-          <h2 style={{ color: theme.text.primary }}>{formatCurrency(stats.totalSpent)}</h2>
-        </div>
-        <div className="summary-item" style={{ background: theme.bg.card, boxShadow: theme.shadow }}>
-          <span style={{ color: theme.text.secondary }}>Transações</span>
-          <h2 style={{ color: theme.text.primary }}>{stats.transactionCount}</h2>
-        </div>
-      </div>
+      <S.StatsSummary>
+        <S.SummaryItem>
+          <S.SummaryLabel>Total Gasto</S.SummaryLabel>
+          <S.SummaryValue>{formatCurrency(stats.totalSpent)}</S.SummaryValue>
+        </S.SummaryItem>
+        <S.SummaryItem>
+          <S.SummaryLabel>Transações</S.SummaryLabel>
+          <S.SummaryValue>{stats.transactionCount}</S.SummaryValue>
+        </S.SummaryItem>
+      </S.StatsSummary>
 
-      <div className="chart-section" style={{ background: theme.bg.card, boxShadow: theme.shadow }}>
-        <h3 style={{ color: theme.text.primary }}>Gastos por Categoria</h3>
+      <S.ChartSection>
+        <S.ChartTitle>Gastos por Categoria</S.ChartTitle>
         {categoryData.length > 0 ? (
           <ResponsiveContainer width="100%" height={250}>
             <PieChart>
@@ -73,14 +73,14 @@ export const Stats: React.FC = () => {
             </PieChart>
           </ResponsiveContainer>
         ) : (
-          <div className="empty-chart" style={{ color: theme.text.secondary }}>
+          <S.EmptyChart>
             Nenhum dado disponível
-          </div>
+          </S.EmptyChart>
         )}
-      </div>
+      </S.ChartSection>
 
-      <div className="chart-section" style={{ background: theme.bg.card, boxShadow: theme.shadow }}>
-        <h3 style={{ color: theme.text.primary }}>Gastos Mensais</h3>
+      <S.ChartSection>
+        <S.ChartTitle>Gastos Mensais</S.ChartTitle>
         {monthlyData.length > 0 ? (
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={monthlyData}>
@@ -91,11 +91,11 @@ export const Stats: React.FC = () => {
             </BarChart>
           </ResponsiveContainer>
         ) : (
-          <div className="empty-chart" style={{ color: theme.text.secondary }}>
+          <S.EmptyChart>
             Nenhum dado disponível
-          </div>
+          </S.EmptyChart>
         )}
-      </div>
-    </div>
+      </S.ChartSection>
+    </S.Container>
   );
 };

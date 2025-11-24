@@ -1,7 +1,7 @@
 import React from 'react';
 import { AlertTriangle } from 'lucide-react';
 import { getUsageColor } from '../../utils/formatters';
-import './UsageBar.css';
+import * as S from './styles';
 
 interface UsageBarProps {
   percentage: number;
@@ -13,32 +13,29 @@ export const UsageBar: React.FC<UsageBarProps> = ({ percentage, spent }) => {
   const color = getUsageColor(percentage);
 
   return (
-    <div className="usage-bar-container">
+    <S.Container>
       {showWarning && (
-        <div className="usage-warning">
+        <S.Warning>
           <AlertTriangle size={16} />
           <span>
-            {percentage >= 90 
-              ? 'Atenção! Limite quase esgotado' 
+            {percentage >= 90
+              ? 'Atenção! Limite quase esgotado'
               : 'Você está próximo do limite'}
           </span>
-        </div>
+        </S.Warning>
       )}
-      
-      <div className="usage-bar">
-        <div 
-          className="usage-fill" 
-          style={{ 
-            width: `${Math.min(percentage, 100)}%`,
-            background: color
-          }}
+
+      <S.Bar>
+        <S.Fill
+          $width={Math.min(percentage, 100)}
+          $color={color}
         />
-      </div>
-      
-      <div className="usage-labels">
+      </S.Bar>
+
+      <S.Labels>
         <span>Usado: R$ {spent.toFixed(2)}</span>
         <span>{percentage.toFixed(0)}%</span>
-      </div>
-    </div>
+      </S.Labels>
+    </S.Container>
   );
 };

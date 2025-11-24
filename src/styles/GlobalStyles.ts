@@ -5,6 +5,7 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
   }
 
   html {
@@ -13,53 +14,60 @@ export const GlobalStyles = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  @media (max-width: 480px) {
-    html {
-      font-size: 15px;
-    }
-  }
-
-  @media (max-width: 360px) {
-    html {
-      font-size: 14px;
-    }
-  }
-
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+    font-family: var(--font-sans);
+    background-color: ${({ theme }) => theme.bg.primary};
+    color: ${({ theme }) => theme.text.primary};
     min-height: 100vh;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
   }
 
-  ::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: rgba(139, 92, 246, 0.5);
-    border-radius: 4px;
-  }
-
-  ::selection {
-    background: rgba(139, 92, 246, 0.3);
-  }
-
-  *:focus-visible {
-    outline: 2px solid #8b5cf6;
-    outline-offset: 2px;
-  }
-
-  * {
-    -webkit-tap-highlight-color: transparent;
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.025em;
   }
 
   button {
     font-family: inherit;
     cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+  }
+
+  input, select, textarea {
+    font-family: inherit;
+    font-size: 1rem;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.text.tertiary};
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.text.secondary};
+  }
+
+  ::selection {
+    background: ${({ theme }) => theme.purple.primary};
+    color: white;
+  }
+
+  *:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.purple.primary};
+    outline-offset: 2px;
   }
 `;

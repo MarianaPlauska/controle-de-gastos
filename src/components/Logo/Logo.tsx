@@ -1,5 +1,5 @@
 import React from 'react';
-import './Logo.css';
+import * as S from './styles';
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
@@ -7,11 +7,11 @@ interface LogoProps {
 
 export const Logo: React.FC<LogoProps> = ({ size = 'md' }) => {
   return (
-    <div className={`logo logo-${size}`}>
-      <span className="logo-m">M</span>
-      <span className="logo-text">y</span>
-      <span className="logo-c">C</span>
-      <span className="logo-text">ontrol</span>
-    </div>
+    <S.Container $size={size}>
+      <S.Highlight>M</S.Highlight>
+      <S.Text>y</S.Text>
+      <S.Highlight>C</S.Highlight>
+      <S.Text>ontrol</S.Text>
+    </S.Container>
   );
 };

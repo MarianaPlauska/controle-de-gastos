@@ -1,19 +1,19 @@
 import React from 'react';
-import { CreditCard, Settings } from 'lucide-react';
+import { Wifi } from 'lucide-react';
 import { Card } from '../../types';
-import './CardVisual.css';
+import * as S from './styles';
 
 interface CardVisualProps {
   card: Card;
   onSettingsClick?: () => void;
 }
 
-export const CardVisual: React.FC<CardVisualProps> = ({ 
-  card, 
+export const CardVisual: React.FC<CardVisualProps> = ({
+  card,
   onSettingsClick
 }) => {
   const colorMap: Record<string, string> = {
-    purple: '#8b5cf6',
+    purple: '#6366f1',
     blue: '#3b82f6',
     green: '#10b981',
     orange: '#f97316',
@@ -24,35 +24,30 @@ export const CardVisual: React.FC<CardVisualProps> = ({
   };
 
   const cardColor = colorMap[card.color] || colorMap.purple;
-  
-
 
   return (
-    <div className="card-visual" style={{ background: `linear-gradient(135deg, ${cardColor}, ${cardColor}dd)` }}>
-      <div className="card-header">
-        <div className="card-brand">
-          <CreditCard size={28} />
-          <span>{card.name}</span>
-        </div>
-        {onSettingsClick && (
-          <button className="settings-btn" onClick={onSettingsClick} aria-label="Configurações do cartão">
-            <Settings size={16} />
-          </button>
-        )}
-      </div>
+    <S.CardContainer $color={cardColor} onClick={onSettingsClick}>
+      <S.CardHeader>
+        <S.Chip />
+        <Wifi size={24} style={{ transform: 'rotate(90deg)' }} />
+      </S.CardHeader>
 
-      <div className="card-number">{card.cardNumber || '**** **** **** ****'}</div>
+      <S.CardNumber>
+        {card.cardNumber ?
+          `•••• •••• •••• ${card.cardNumber}` :
+          '•••• •••• •••• ••••'
+        }
+      </S.CardNumber>
 
-      <div className="card-details">
-        <div className="card-detail">
-          <span className="label">Titular</span>
-          <span className="value">{card.cardHolder || 'Seu Nome'}</span>
-        </div>
-        <div className="card-detail">
-          <span className="label">Vencimento</span>
-          <span className="value">{card.dueDate ? `Dia ${card.dueDate}` : '--'}</span>
-        </div>
-      </div>
-    </div>
+      <S.CardFooter>
+        <S.CardInfo>
+          <S.Label>Titular</S.Label>
+          <S.Value>{card.cardHolder || 'SEU NOME'}</S.Value>
+        </S.CardInfo>
+        <S.CardBrand>
+          <S.BrandName>{card.name}</S.BrandName>
+        </S.CardBrand>
+      </S.CardFooter>
+    </S.CardContainer>
   );
 };

@@ -1,45 +1,31 @@
-import React, { useState } from 'react';
-import { ThemeProvider } from 'styled-components';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Layout } from './components/Layout/Layout';
 import { Home } from './pages/Home/Home';
 import { Cards } from './pages/Cards/Cards';
-import { Stats } from './pages/Stats/Stats';
+import { CardDetails } from './pages/CardDetails/CardDetails';
+import { Expenses } from './pages/Expenses/Expenses';
 import { Notes } from './pages/Notes/Notes';
-import { BottomNav } from './components/BottomNav/BottomNav';
-import { GlobalStyles } from './styles/GlobalStyles';
-import { useTheme } from './hooks/useTheme';
-import { CardsProvider } from './contexts/CardsContext';
-import './styles/variables.css';
+import { ThemeProvider } from './contexts/ThemeContext';
+import GlobalStyle from './styles/global';
 
-const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('home');
-  const { theme } = useTheme();
-
-  const renderPage = () => {
-    switch (activeTab) {
-      case 'home':
-        return <Home />;
-      case 'cards':
-        return <Cards />;
-      case 'stats':
-        return <Stats />;
-      case 'notes':
-        return <Notes />;
-      default:
-        return <Home />;
-    }
-  };
-
+function App() {
   return (
-    <CardsProvider>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <div style={{ minHeight: '100vh', background: theme.bg.primary }}>
-          {renderPage()}
-          <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
-        </div>
-      </ThemeProvider>
-    </CardsProvider>
+    <ThemeProvider>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="cards" element={<Cards />} />
+            <Route path="cards/:id" element={<CardDetails />} />
+            <Route path="expenses" element={<Expenses />} />
+            <Route path="notes" element={<Notes />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   );
-};
+}
 
 export default App;

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Home, CreditCard, BarChart3, FileText } from 'lucide-react';
-import { useTheme } from '../../hooks/useTheme';
-import './BottomNav.css';
+import * as S from './styles';
 
 interface BottomNavProps {
   activeTab: string;
@@ -9,8 +8,6 @@ interface BottomNavProps {
 }
 
 export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) => {
-  const { theme } = useTheme();
-  
   const tabs = [
     { id: 'home', icon: Home, label: 'Início' },
     { id: 'cards', icon: CreditCard, label: 'Cartões' },
@@ -19,21 +16,17 @@ export const BottomNav: React.FC<BottomNavProps> = ({ activeTab, onTabChange }) 
   ];
 
   return (
-    <nav className="bottom-nav" style={{ background: theme.bg.secondary, borderColor: theme.border }}>
+    <S.Nav>
       {tabs.map(({ id, icon: Icon, label }) => (
-        <button
+        <S.NavButton
           key={id}
-          className={`nav-button ${activeTab === id ? 'active' : ''}`}
-          style={{
-            background: activeTab === id ? theme.purple.light : 'transparent',
-            color: activeTab === id ? theme.purple.primary : theme.text.tertiary,
-          }}
+          $active={activeTab === id}
           onClick={() => onTabChange(id)}
         >
           <Icon size={20} />
           <span>{label}</span>
-        </button>
+        </S.NavButton>
       ))}
-    </nav>
+    </S.Nav>
   );
 };
